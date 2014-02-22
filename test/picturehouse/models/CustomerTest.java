@@ -1,6 +1,5 @@
 package picturehouse.models;
 
-//import picturehouse.models.Customer;
 import org.javalite.activejdbc.Base;
 import org.junit.After;
 import org.junit.Before;
@@ -13,13 +12,14 @@ import static org.javalite.test.jspec.JSpec.the;
  * @author sevabaskin
  */
 public class CustomerTest {
-
+    //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
 		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
 		Base.openTransaction();
 	}
 
+    //  Close database connection before after each test and rollback (delete anything added by the test)
 	@After
 	public void after() {
 		Base.rollbackTransaction();

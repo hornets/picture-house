@@ -18,8 +18,6 @@ public class Customer extends Model {
         validateRegexpOf("password", "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,})").message("Password must contain at least one uppercase, lowercase character and a digit");
         
         validateRegexpOf("credit_card_number", "(\\d{16})").message("Credit card number can only contain 16 digits");
-//        validateNumericalityOf("credit_card_number").message("Credit card number can only contain characters");
-//        validateRegexpOf("credit_card_number", "((?=.*\\d).{16})").message("Credit card number must be 16 digist long");
 
         // implement Uniqueness validation later
         //validateWith(new UniquenessValidator("username"));

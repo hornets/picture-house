@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Sevas-MacBook-Air.local" name="picturehouse.models.CustomerTest" tests="4" time="0.644" timestamp="2014-02-22T21:46:08">
+<testsuite errors="0" failures="0" hostname="Sevas-MacBook-Air.local" name="picturehouse.controllers.CustomerControllerTest" tests="1" time="0.525" timestamp="2014-02-22T21:46:07">
   <properties>
     <property name="default.javac.source" value="1.7" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -82,7 +82,7 @@
     <property name="libs.JAXB-ENDORSED.src" value="" />
     <property name="libs.hibernate-persistence.javadoc" value="" />
     <property name="libs.ejb3-persistence.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner picturehouse.models.CustomerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/test/results/TEST-picturehouse.models.CustomerTest.xml crashfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junitvmwatcher424027359497329952.properties propsfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junit1932139066255703475.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner picturehouse.controllers.CustomerControllerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/test/results/TEST-picturehouse.controllers.CustomerControllerTest.xml crashfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junitvmwatcher6188765326047183230.properties propsfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junit201636581628013534.properties" />
     <property name="built-jar.properties" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/built-jar.properties" />
     <property name="libs.junit.src" value="" />
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
@@ -281,10 +281,7 @@
     <property name="mkdist.disabled" value="false" />
     <property name="sun.arch.data.model" value="64" />
   </properties>
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidatePasswordIsSecure" time="0.391" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateCreditCardNumber" time="0.025" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateMandatoryFields" time="0.088" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateUniqueUsername" time="0.047" />
+  <testcase classname="picturehouse.controllers.CustomerControllerTest" name="testVerifyCredentials" time="0.447" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
