@@ -1,4 +1,4 @@
-# Before running the script login to mysql first by running
+#  Before running the script login to mysql first by running
 # mysql -u root -p
 
 # Cretae development database
