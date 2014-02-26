@@ -25,7 +25,7 @@ CREATE TABLE movies (
 	title varchar(240) NOT NULL,
 	trailer_url varchar(240) NOT NULL,
 	synopsis text NOT NULL,
-	startDate date NOT NULL
+	start_date date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 auto_increment=1 ;
 
 
