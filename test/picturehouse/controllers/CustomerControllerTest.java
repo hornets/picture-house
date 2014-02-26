@@ -35,19 +35,31 @@ public class CustomerControllerTest {
      */
     @Test
     public void testVerifyCredentials() {
-        
         // Create a new customer record
         CustomerController controller = new CustomerController();
         controller.create("Marilyn", "Passw0rd", "1111222233334444");
 
-        
         // try logging in with wrong credentials should return false
         assertFalse(controller.verifyCredentials("Marilyn", "Passw0rds"));
         
         // try logging in with correct credentials should return false
         assertTrue(controller.verifyCredentials("Marilyn", "Passw0rd"));
-        
-        
     }
     
+    /**
+     * Test of update method, of class CustomerController.
+     */
+    @Test
+    public void testUpdateCustomer() {
+        // Create a new customer record
+        CustomerController controller = new CustomerController();
+        controller.create("Marilyn", "Passw0rd", "1111222233334444");
+        Customer customer = Customer.findFirst("username = 'Marilyn'");
+        String id = customer.getString("id");
+
+        // try updating the record
+        controller.update(id, "Marilyns", "Passw0rd", "1111222233334444");
+        the(Customer.findFirst("username = 'Marilyns'")).shouldBe("valid");
+    }
+
 }

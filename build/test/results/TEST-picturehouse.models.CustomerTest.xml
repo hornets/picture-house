@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Sevas-MacBook-Air.local" name="picturehouse.models.CustomerTest" tests="4" time="0.681" timestamp="2014-02-23T13:31:46">
+<testsuite errors="0" failures="0" hostname="Sevas-MacBook-Air.local" name="picturehouse.models.CustomerTest" tests="3" time="0.67" timestamp="2014-02-26T20:22:30">
   <properties>
     <property name="default.javac.source" value="1.7" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -51,7 +51,7 @@
     <property name="user.name" value="sevabaskin" />
     <property name="libs.testng.maven-pom" value="" />
     <property name="libs.eclipselinkmodelgen.src" value="" />
-    <property name="empty.dir" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/empty" />
+    <property name="empty.dir" value="/Users/sevabaskin/Documents/Netbeans/picture-house/build/empty" />
     <property name="sun.io.unicode.encoding" value="UnicodeBig" />
     <property name="sun.jnu.encoding" value="UTF-8" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
@@ -82,11 +82,11 @@
     <property name="libs.JAXB-ENDORSED.src" value="" />
     <property name="libs.hibernate-persistence.javadoc" value="" />
     <property name="libs.ejb3-persistence.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner picturehouse.models.CustomerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/test/results/TEST-picturehouse.models.CustomerTest.xml crashfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junitvmwatcher6849959695283107811.properties propsfile=/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/junit3900978769471392868.properties" />
-    <property name="built-jar.properties" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/built-jar.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner picturehouse.models.CustomerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/sevabaskin/Documents/Netbeans/picture-house/build/test/results/TEST-picturehouse.models.CustomerTest.xml crashfile=/Users/sevabaskin/Documents/Netbeans/picture-house/build/junitvmwatcher1448635221109898257.properties propsfile=/Users/sevabaskin/Documents/Netbeans/picture-house/build/junit4973544765789445403.properties" />
+    <property name="built-jar.properties" value="/Users/sevabaskin/Documents/Netbeans/picture-house/build/built-jar.properties" />
     <property name="libs.junit.src" value="" />
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
-    <property name="ant.file" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/build.xml" />
+    <property name="ant.file" value="/Users/sevabaskin/Documents/Netbeans/picture-house/build.xml" />
     <property name="libs.hibernate-persistencemodelgen.javadoc" value="" />
     <property name="libs.junit_4.src" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/docs/junit-4.10-sources.jar" />
     <property name="junit.available" value="true" />
@@ -137,7 +137,7 @@
     <property name="libs.jpa20-persistence.src" value="" />
     <property name="user.country.format" value="GB" />
     <property name="user.properties.file" value="/Users/sevabaskin/Library/Application Support/NetBeans/7.4/build.properties" />
-    <property name="ant.file.PictureHouse-impl" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/nbproject/build-impl.xml" />
+    <property name="ant.file.PictureHouse-impl" value="/Users/sevabaskin/Documents/Netbeans/picture-house/nbproject/build-impl.xml" />
     <property name="libs.JWSAntTasks.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar" />
     <property name="libs.spring-framework.javadoc" value="" />
     <property name="gopherProxySet" value="false" />
@@ -160,7 +160,7 @@
     <property name="libs.eclipselinkmodelgen.maven-pom" value="" />
     <property name="ant.java.version" value="1.7" />
     <property name="javadoc.noindex" value="false" />
-    <property name="basedir" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse" />
+    <property name="basedir" value="/Users/sevabaskin/Documents/Netbeans/picture-house" />
     <property name="java.class.version" value="51.0" />
     <property name="javac.test.classpath" value="libs/activejdbc-1.4.8.jar:libs/javalite-common-1.4.8.jar:libs/mysql-connector-java-5.1.25.jar:libs/slf4j-api-1.7.5.jar:libs/slf4j-simple-1.7.5.jar:build/classes:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/modules/ext/junit-4.10.jar" />
     <property name="javac.processorpath" value="libs/activejdbc-1.4.8.jar:libs/javalite-common-1.4.8.jar:libs/mysql-connector-java-5.1.25.jar:libs/slf4j-api-1.7.5.jar:libs/slf4j-simple-1.7.5.jar:build_time_libs/activejdbc-instrumentation-1.4.8.jar:build_time_libs/javassist-3.8.0.GA.jar" />
@@ -205,7 +205,7 @@
     <property name="libs.spring-framework.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/org-apache-commons-logging.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/cglib-2.2.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/spring/spring-2.5.6.SEC03.jar" />
     <property name="libs.swing-layout.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/modules/ext/swing-layout-1.0.4.jar" />
     <property name="java.vm.specification.version" value="1.7" />
-    <property name="work.dir" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse" />
+    <property name="work.dir" value="/Users/sevabaskin/Documents/Netbeans/picture-house" />
     <property name="libs.jaxb.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/jaxb-impl.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/jaxb-xjc.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/jaxb1-impl.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/activation.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/api/jaxb-api.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/ide/modules/ext/jaxb/api/jsr173_1.0_api.jar" />
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit" />
     <property name="javadoc.use" value="true" />
@@ -217,7 +217,7 @@
     <property name="java.vm.vendor" value="Oracle Corporation" />
     <property name="file.reference.javassist-3.8.0.GA.jar" value="build_time_libs/javassist-3.8.0.GA.jar" />
     <property name="libs.absolutelayout.maven-pom" value="" />
-    <property name="user.dir" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse" />
+    <property name="user.dir" value="/Users/sevabaskin/Documents/Netbeans/picture-house" />
     <property name="debug-transport" value="dt_socket" />
     <property name="libs.ejb3-persistence.maven-pom" value="" />
     <property name="application.args" value="" />
@@ -234,7 +234,7 @@
     <property name="test.binaryincludes" value="&lt;nothing&gt;" />
     <property name="libs.hibernate-persistence.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/antlr-2.7.6.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/cglib-2.2.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/commons-collections-3.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/dom4j-1.6.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/jta-1.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-core-3.6.10.Final.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-commons-annotations-3.2.0.Final.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-entitymanager-3.6.10.Final.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-tools-3.6.0.CR1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/javassist-3.12.0.GA.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/c3p0-0.9.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/oscache-2.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/slf4j-api-1.6.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/slf4j-simple-1.6.1.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar" />
     <property name="annotation.processing.processor.options" value="" />
-    <property name="java.class.path" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/libs/activejdbc-1.4.8.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/libs/javalite-common-1.4.8.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/libs/mysql-connector-java-5.1.25.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/libs/slf4j-api-1.7.5.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/libs/slf4j-simple-1.7.5.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/classes:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/modules/ext/junit-4.10.jar:/Users/sevabaskin/Documents/Netbeans/PictureHouse/build/test/classes:/usr/share/java/ant-1.8.2/lib/ant-launcher.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar" />
+    <property name="java.class.path" value="/Users/sevabaskin/Documents/Netbeans/picture-house/libs/activejdbc-1.4.8.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/libs/javalite-common-1.4.8.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/libs/mysql-connector-java-5.1.25.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/libs/slf4j-api-1.7.5.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/libs/slf4j-simple-1.7.5.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/build/classes:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/modules/ext/junit-4.10.jar:/Users/sevabaskin/Documents/Netbeans/picture-house/build/test/classes:/usr/share/java/ant-1.8.2/lib/ant-launcher.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar" />
     <property name="ant.library.dir" value="/usr/share/ant/lib" />
     <property name="os.arch" value="x86_64" />
     <property name="javac.deprecation" value="false" />
@@ -271,7 +271,7 @@
     <property name="do.archive+manifest.available" value="true" />
     <property name="libs.swing-layout.javadoc" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/docs/swing-layout-1.0.4-doc.zip" />
     <property name="libs.swing-layout.src" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/platform/docs/swing-layout-1.0.4-src.zip" />
-    <property name="ant.file.PictureHouse" value="/Users/sevabaskin/Documents/Netbeans/PictureHouse/build.xml" />
+    <property name="ant.file.PictureHouse" value="/Users/sevabaskin/Documents/Netbeans/picture-house/build.xml" />
     <property name="javac.target" value="1.7" />
     <property name="java.vendor" value="Oracle Corporation" />
     <property name="libs.eclipselink.classpath" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/eclipselink/eclipselink.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/eclipselink/javax.persistence_2.1.0.v201304241213.jar:/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/modules/ext/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.1.v20130918-f2b9fc5.jar" />
@@ -281,10 +281,9 @@
     <property name="mkdist.disabled" value="false" />
     <property name="sun.arch.data.model" value="64" />
   </properties>
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateMandatoryFields" time="0.501" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateUniqueUsername" time="0.03" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidatePasswordIsSecure" time="0.036" />
-  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateCreditCardNumber" time="0.034" />
+  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidatePasswordIsSecure" time="0.453" />
+  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateCreditCardNumber" time="0.032" />
+  <testcase classname="picturehouse.models.CustomerTest" name="shouldValidateMandatoryFields" time="0.092" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

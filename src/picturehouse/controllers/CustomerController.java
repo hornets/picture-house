@@ -18,4 +18,9 @@ public class CustomerController {
         Customer customer = Customer.findFirst("username = ?", username);
         return customer.getString("password").equals(password);
     }
+
+    public void update(String id, String username, String password, String credit_card_number) {
+    	Customer customer = Customer.findFirst("id = ?", id);
+    	customer.set("username", username).set("password", password).set("credit_card_number", credit_card_number).saveIt();
+    }
 }
