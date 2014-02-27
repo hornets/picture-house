@@ -10,7 +10,8 @@ CREATE TABLE ticket_bookings (
     id int(11) NOT NULL auto_increment PRIMARY KEY,
     customer_id int(11) NOT NULL,
     screening_id int(11) NOT NULL,
-    seat varchar(240) NOT NULL
+    seat varchar(240) NOT NULL,
+    is_printed 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 auto_increment=1 ;
 
 
@@ -44,10 +45,9 @@ CREATE TABLE newsletters (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 auto_increment=1 ;
 
 
--- CREATE TABLE screenings (
--- 	id int(11) NOT NULL auto_increment PRIMARY KEY,
--- 	movie_d int(11) NOT NULL,
--- 	price decimal NOT NULL,
--- 	-- seats varchar(240) NOT NULL,
--- 	start_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1 auto_increment=1 ;
+CREATE TABLE screenings (
+	id int(11) NOT NULL auto_increment PRIMARY KEY,
+	movie_id int(11) NOT NULL,
+	price decimal NOT NULL,
+	start_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 auto_increment=1 ;

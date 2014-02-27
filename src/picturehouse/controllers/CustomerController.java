@@ -11,7 +11,10 @@ public class CustomerController {
     public CustomerController() {
     }
     public void create(String username, String password, String credit_card_number) {
-       new Customer().set("username", username).set("password", password).set("credit_card_number", credit_card_number).saveIt();
+       new Customer().set("username", username)
+                     .set("password", password)
+                     .set("credit_card_number", credit_card_number)
+                     .saveIt();
     }
 
     boolean verifyCredentials(String username, String password) {
@@ -19,8 +22,11 @@ public class CustomerController {
         return customer.getString("password").equals(password);
     }
 
-    public void update(String id, String username, String password, String credit_card_number) {
+    public void update(int id, String username, String password, String credit_card_number) {
     	Customer customer = Customer.findFirst("id = ?", id);
-    	customer.set("username", username).set("password", password).set("credit_card_number", credit_card_number).saveIt();
+    	customer.set("username", username)
+                .set("password", password)
+                .set("credit_card_number", credit_card_number)
+                .saveIt();
     }
 }

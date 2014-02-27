@@ -55,7 +55,7 @@ public class CustomerControllerTest {
         CustomerController controller = new CustomerController();
         controller.create("Marilyn", "Passw0rd", "1111222233334444");
         Customer customer = Customer.findFirst("username = 'Marilyn'");
-        String id = customer.getString("id");
+        int id =  Integer.parseInt(customer.getString("id"));
 
         // try updating the record
         controller.update(id, "Marilyns", "Passw0rd", "1111222233334444");

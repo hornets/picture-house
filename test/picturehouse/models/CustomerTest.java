@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.javalite.test.jspec.JSpec.the;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -47,19 +48,18 @@ public class CustomerTest {
 
 	}
 
-//	@Test
-//	public void shouldValidateUniqueUsername() {
-//        
-//        
-//        // create customer named johnDoe, and ensure the record was created with assertTrue
-//        assertTrue(new Customer().set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b").saveIt());
-//        
-//		// attempt creating another customer named johnDoe
-//        Customer customer = new Customer();
-//		customer.set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b");
-//		the(customer).shouldNotBe("valid");
-//		the(customer.errors().get("username")).shouldBeEqual("Unfortunately this username is already taken, please choose a different one");
-//	}
+	@Test
+	public void shouldValidateUniqueUsername() {
+       
+		// create customer named johnDoe, and ensure the record was created with assertTrue
+		assertTrue(new Customer().set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b").saveIt());
+       
+		// attempt creating another customer named johnDoe
+		Customer customer = new Customer();
+		customer.set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b").saveIt();
+		the(customer).shouldNotBe("valid");
+		the(customer.errors().get("username")).shouldBeEqual("Unfortunately this username is already taken, please choose a different one");
+	}
 
 	@Test
 	public void shouldValidatePasswordIsSecure() {

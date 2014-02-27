@@ -11,19 +11,18 @@ import org.javalite.activejdbc.validation.ValidatorAdapter;
  */
 public class UniquenessValidator extends ValidatorAdapter {
 
-   private final String attribute;
+	private final String attribute;
 
-   public UniquenessValidator(String attribute) {
-       this.attribute = attribute;
-       setMessage("should be unique");
-   }
+	public UniquenessValidator(String attribute) {
+		this.attribute = attribute;
+		setMessage("should be unique");
+	}
 
-   
-   @Override
-   public void validate(Model m) {
-//		if(Base.count(Registry.instance().getTableName(m.getClass()), attribute + " = ? AND id IS NOT ?", m.get(attribute), m.getId()) > 0) {
-//           m.addValidator(this, attribute);
-//       }
-   }
+	@Override
+	public void validate(Model m) {
+		if(Base.count(Registry.instance().getMetaModel(m.getClass()).getTableName(), attribute + " = ? AND id != ?", m.get(attribute), m.getId()) > 0) {
+			m.addValidator(this, attribute);
+		}
+	}
 
 }

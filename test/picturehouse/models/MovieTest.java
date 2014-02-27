@@ -1,5 +1,6 @@
 package picturehouse.models;
 
+import java.sql.Date;
 import org.javalite.activejdbc.Base;
 import org.junit.After;
 import org.junit.Before;
@@ -40,10 +41,10 @@ public class MovieTest {
         the(movie.errors().get("start_date")).shouldBeEqual("Please enter a movie start date");
 
 		//set missing values
-		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", "2011-12-3");
+		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", new Date(12, 9, 31));
 		//all is good:
 		movie = new Movie();
-		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", "2011-12-3");
+		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", new Date(12, 9, 31));
 		the(movie).shouldBe("valid");
 	}
 }
