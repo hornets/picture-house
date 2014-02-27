@@ -18,7 +18,6 @@ public class Customer extends Model {
         
         validateRegexpOf("credit_card_number", "(\\d{16})").message("Credit card number can only contain 16 digits");
 
-        // implement Uniqueness validation later
         validateWith(new UniquenessValidator("username")).message("Unfortunately this username is already taken, please choose a different one");
 
     }
