@@ -3,11 +3,6 @@ import java.sql.Date;
 import java.util.List;
 import picturehouse.models.Newsletter;
 
-/**
- *
- * @author Probably Seva Baskin
- */
-
 public class NewsletterController {
     
     public NewsletterController() {
