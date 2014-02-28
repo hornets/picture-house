@@ -41,8 +41,8 @@ public class CustomerTest {
 
 		//set missing values
 		customer.set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b");
-		
-		// verify the instance is valid
+		//all is good:
+		customer = new Customer();
 		customer.set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b");
 		the(customer).shouldBe("valid");
 
@@ -51,7 +51,7 @@ public class CustomerTest {
 	@Test
 	public void shouldValidateUniqueUsername() {
        
-		// create customer named johnDoe, and using assertTrue ensure the record was created
+		// create customer named johnDoe, and ensure the record was created with assertTrue
 		assertTrue(new Customer().set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Passw0rdA1b").saveIt());
        
 		// attempt creating another customer named johnDoe
@@ -77,6 +77,7 @@ public class CustomerTest {
 		// set correct password
 		customer.set("username", "johnDoe", "credit_card_number", "1111222233334444", "password", "Pa$$w0rd");
 		the(customer).shouldBe("valid");
+
 	}
 
 	@Test
