@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.javalite.test.jspec.JSpec.the;
 
-public class RoomPlanTest {
+public class SeatTest {
     //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
@@ -22,22 +22,21 @@ public class RoomPlanTest {
 	}
 
 
-	public RoomPlanTest() {
+	public SeatTest() {
 	}
 
 	@Test
 	public void shouldValidateMandatoryFields() {
-		RoomPlan plan = new RoomPlan();
+		Seat seat = new Seat();
 
 		//validation rules
-        the(plan).shouldNotBe("valid");
-		the(plan.errors().get("seat_number")).shouldBeEqual("A valid seat number is required");
+        the(seat).shouldNotBe("valid");
+		the(seat.errors().get("seat_number")).shouldBeEqual("A valid seat number is required");
+		the(seat.errors().get("row_number")).shouldBeEqual("A valid row number is required");
 
 		//set attributes
-		plan.set("seat_number", 1);
-		//validation should pass now
-		plan = new RoomPlan();
-		plan.set("seat_number", 1);
-		the(plan).shouldBe("valid");
+		seat.set("seat_number", 1);
+		seat.set("row_number", 1);
+		the(seat).shouldBe("valid");
 	}
 }

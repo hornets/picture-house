@@ -93,7 +93,7 @@ public class MovieControllerTest {
         int id =  Integer.parseInt(movie.getString("id"));
 
         // return the newly created movie
-        movie = controller.showMovie(id);
+        movie = controller.show(id);
         
         // make sure the return movie is the expected movie
         assertEquals(movie.getString("title"), "Inception");

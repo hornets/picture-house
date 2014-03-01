@@ -5,6 +5,8 @@ import java.util.List;
 import org.javalite.activejdbc.Base;
 import static org.javalite.test.jspec.JSpec.the;
 import org.junit.After;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import picturehouse.models.*;
@@ -32,44 +34,55 @@ public class TicketBookingControllerTest {
 
     @Test
     public void shouldCreateNewTicketBookings() {
-        // create a customer
-        new CustomerController().create("johnDoe", "Passw0rdA1b", "1111222233334444");
-        int customer_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
-        // create a movie
-        new MovieController().create("Inception", "http://www.youtube.com", "good one", Date.valueOf("2011-12-25"));
-        int movie_id =  Integer.parseInt(Movie.findFirst("title = 'Inception'").getString("id"));
+        // set some fake ids
+        int customer_id = 1;
+        int movie_id = 1;
+        
         // create a screening
-        //! IMPORTANT: CHANGE to screening controller
-        Screening screening = new Screening().create("movie_id", movie_id, "price", 12.9, "start_date", Date.valueOf("2011-12-25"));
-        int screening_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
+        Screening screening = Screening.createIt("movie_id", 1 ,"price",10.00, "start_date", Date.valueOf("2014-02-28"));
+        int screening_id =  screening.getInteger("id");
 
-        // Create a new customer record
+        // create a seat in the room
+        int seat_number = 1;
+        int row_number = 1;
+        Seat seat = Seat.createIt("seat_number", seat_number, "row_number", row_number);
+        int seat_id =  seat.getInteger("id");
+
+        // ensure the seat is available for booking
+        assertFalse(screening.isSeatBooked(seat_number, row_number));
+
+        // create a new TicketBooking and book the seat
         TicketBookingController controller = new TicketBookingController();
-        controller.create(customer_id, screening_id, "1", true);
-        // make a booking
-        List<TicketBooking> ticketBookings = TicketBooking.where("seat = '1'");
+        controller.create(customer_id, screening_id, seat_id, true);
+        
+        // verify that a new ticket booking has been created 
+        List<TicketBooking> ticketBookings = TicketBooking.where("seat_id = ?", seat_id);
         the(ticketBookings.size()).shouldBeEqual(1);
+        
         // ensure the seat has indeed been booked
-        // screening.isSeated(screening_id, )
+        assertTrue(screening.isSeatBooked(seat_number, row_number));
 
     }
     @Test
     public void shouldReturnUnprintedTickets() {
-        new CustomerController().create("johnDoe", "Passw0rdA1b", "1111222233334444");
-        int customer_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
-        // create a movie
-        new MovieController().create("Inception", "http://www.youtube.com", "good one", Date.valueOf("2011-12-25"));
-        int movie_id =  Integer.parseInt(Movie.findFirst("title = 'Inception'").getString("id"));
-        // create a screening
-        new Screening().create("movie_id", movie_id, "price", 12.9, "start_date", Date.valueOf("2011-12-25"));
-        int screening_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
+        // set some fake ids
+        int customer_id = 1;
+        int movie_id = 1;
+        int screening_id = 1;
+
+        // create several seats in the room
+        Seat seat1 = Seat.createIt("seat_number", 1, "row_number", 1);
+        Seat seat2 = Seat.createIt("seat_number", 2, "row_number", 1);
+        Seat seat3 = Seat.createIt("seat_number", 3, "row_number", 1);
+        // get seats' ids
+        int seat_id1 =  Integer.parseInt(Seat.findFirst("seat_number = ?", 1).getString("id"));
+        int seat_id2 =  Integer.parseInt(Seat.findFirst("seat_number = ?", 2).getString("id"));
+        int seat_id3 =  Integer.parseInt(Seat.findFirst("seat_number = ?", 3).getString("id"));
+
         TicketBookingController controller = new TicketBookingController();
-        controller.create(customer_id, screening_id, "A3", true);
-        controller.create(customer_id, screening_id, "A1", false);
-        controller.create(customer_id, screening_id, "A2", false);
+        controller.create(customer_id, screening_id, seat_id1, true);
+        controller.create(customer_id, screening_id, seat_id1, false);
+        controller.create(customer_id, screening_id, seat_id1, false);
         the(controller.returnUnprintedTickets(screening_id).size()).shouldBeEqual(2);
     }
-
-    @Test
-    public void shouldEnsureTheSeatIsNotTaken() {   }
 }

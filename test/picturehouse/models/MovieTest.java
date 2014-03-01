@@ -41,10 +41,10 @@ public class MovieTest {
         the(movie.errors().get("start_date")).shouldBeEqual("Please enter a movie start date");
 
 		//set missing values
-		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", new Date(12, 9, 31));
+		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", Date.valueOf("2011-12-25"));
 		//all is good:
 		movie = new Movie();
-		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", new Date(12, 9, 31));
+		movie.set("title", "Inception", "trailer_url", "http://www.youtube.com", "synopsis", "good movie", "start_date", Date.valueOf("2011-12-25"));
 		the(movie).shouldBe("valid");
 	}
 }

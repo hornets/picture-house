@@ -10,10 +10,10 @@ import java.util.List;
 public class TicketBookingController {    
     public TicketBookingController() {
     }
-    public void create(int customer_id, int screening_id, String seat, Boolean is_printed){
+    public void create(int customer_id, int screening_id, int seat_id, Boolean is_printed){
         new TicketBooking().set("customer_id", customer_id)
                            .set("screening_id", screening_id)
-                           .set("seat", seat)
+                           .set("seat_id", seat_id)
                            .set("is_printed", is_printed)
                            .saveIt();
        // TODO: book ticket

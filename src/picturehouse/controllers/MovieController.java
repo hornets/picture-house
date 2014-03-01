@@ -28,9 +28,8 @@ public class MovieController {
     public void destroy(int id){
         Movie.findFirst("id = ?", id).delete();
     }
-    public Movie showMovie(int id){
-        Movie movie = Movie.findFirst("id = ?", id);
-        return movie; 
+    public Movie show(int id){
+        return Movie.findFirst("id = ?", id);
     }
     public List<Movie> showMoviesAfter(Date premieredAfter){
         List<Movie> movies = Movie.where("start_date > ?", premieredAfter);

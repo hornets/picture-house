@@ -1,7 +1,6 @@
 package picturehouse.models;
 
 import org.javalite.activejdbc.Model;
-import picturehouse.validators.UniquenessValidator;
 
 /**
  *

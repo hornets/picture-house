@@ -1,13 +1,11 @@
 package picturehouse.models;
 
-import java.sql.Date;
+
 import org.javalite.activejdbc.Base;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.javalite.test.jspec.JSpec.the;
-import picturehouse.controllers.CustomerController;
-import picturehouse.controllers.MovieController;
 
 /**
  *
@@ -40,14 +38,9 @@ public class MovieReviewTest {
 		the(mr.errors().get("customer_id")).shouldBeEqual("Error: a movie review must be written by someone");
 		the(mr.errors().get("movie_id")).shouldBeEqual("Error: a movie review must belong to a movie");
 		the(mr.errors().get("content")).shouldBeEqual("Please enter your review text");
-		// create a customer
-		new CustomerController().create("johnDoe", "Passw0rdA1b", "1111222233334444");
-		int customer_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
 
-		new MovieController().create("Inception", "http://www.youtube.com", "good one", Date.valueOf("2011-12-25"));
-        int movie_id =  Integer.parseInt(Movie.findFirst("title = 'Inception'").getString("id"));
 		//set missing values
-		mr.set("customer_id", customer_id, "movie_id", movie_id, "content", "good movie");
+		mr.set("customer_id", 1, "movie_id", 1, "content", "good movie");
 		// test that all is good now:
 		the(mr).shouldBe("valid");
 

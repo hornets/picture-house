@@ -1,14 +1,11 @@
 package picturehouse.controllers;
 
-import java.sql.Date;
 import org.javalite.activejdbc.Base;
 import static org.javalite.test.jspec.JSpec.the;
 import org.junit.After;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
-import picturehouse.models.Customer;
-import picturehouse.models.Movie;
 import picturehouse.models.MovieReview;
 
 /**
@@ -38,12 +35,10 @@ public class MovieReviewControllerTest {
      */
     @Test
     public void testMovieReviewController() {
-		
-		new CustomerController().create("johnDoe", "Passw0rdA1b", "1111222233334444");
-		int customer_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
 
-		new MovieController().create("Inception", "http://www.youtube.com", "good one", Date.valueOf("2011-12-25"));
-		int movie_id =  Integer.parseInt(Movie.findFirst("title = 'Inception'").getString("id"));
+		// create fake ids
+		int customer_id = 1;
+		int movie_id = 1;
 
 		// test creating a new movie review
 		MovieReviewController controller = new MovieReviewController();

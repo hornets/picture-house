@@ -1,9 +1,9 @@
 package picturehouse.controllers;
 import java.sql.Date;
 import java.util.List;
-import picturehouse.models.RoomPlan;
+import picturehouse.models.Seat;
 import picturehouse.models.Screening;
-import picturehouse.models.SeatBooking;
+import picturehouse.models.TicketBooking;
 
 public class ScreeningController {
     
@@ -31,7 +31,7 @@ public class ScreeningController {
         }
         return null;
     }
-    public List<Screening> searchScreening(Date start_date){
+    public List<Screening> showScreeningsAfter(Date start_date){
         List<Screening> screeningList = Screening.where("start_date > ?", start_date);
         
         if(screeningList != null){
@@ -39,21 +39,14 @@ public class ScreeningController {
         }
         return null;
     }
+    
     // load screening based on id
-    public Screening load(Integer id){
+    public Screening show(Integer id){
         Screening screening = Screening.findFirst("id = ?", id);
         
         if(screening != null){
             return screening;
         } 
         return null;
-    }
-    public boolean isSeated(Integer screening_id, Integer seat_number){
-        RoomPlan room = RoomPlan.findFirst("seat_number = ?", seat_number);
-        int seat_id =  Integer.parseInt(room.getString("id"));
-        
-        SeatBooking booking = SeatBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, screening_id);
-        
-        return booking != null;        
     }
 }   
