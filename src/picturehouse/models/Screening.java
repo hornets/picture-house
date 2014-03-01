@@ -2,6 +2,10 @@ package picturehouse.models;
 
 import org.javalite.activejdbc.Model;
 
+/**
+ * Class Screening contains information regarding a particlar time when a particular movie is screened
+ * as well as the ticket price for attending that screening.
+ */
 public class Screening extends Model {
     static {
         validatePresenceOf("movie_id").message("A movie id is required ");
