@@ -10,7 +10,7 @@ public class RoomPlanTest {
     //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
-		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:8889/picturehouse_test", "root", "root");
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
 		Base.openTransaction();
 	}
 
@@ -21,6 +21,7 @@ public class RoomPlanTest {
 		Base.close();
 	}
 
+
 	public RoomPlanTest() {
 	}
 
@@ -29,8 +30,8 @@ public class RoomPlanTest {
 		RoomPlan plan = new RoomPlan();
 
 		//validation rules
-                the(plan).shouldNotBe("valid");
-		the(plan.errors().get("seat_number")).shouldBeEqual("A seat number existing in the room is required");
+        the(plan).shouldNotBe("valid");
+		the(plan.errors().get("seat_number")).shouldBeEqual("A valid seat number is required");
 
 		//set attributes
 		plan.set("seat_number", 1);

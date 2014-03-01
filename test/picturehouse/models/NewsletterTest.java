@@ -10,7 +10,7 @@ public class NewsletterTest {
     //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
-		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:8889/picturehouse_test", "root", "root");
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
 		Base.openTransaction();
 	}
 
@@ -21,6 +21,7 @@ public class NewsletterTest {
 		Base.close();
 	}
 
+
 	public NewsletterTest() {
 	}
 
@@ -29,9 +30,9 @@ public class NewsletterTest {
 		Newsletter newsletter = new Newsletter();
 
 		//validation rules
-                the(newsletter).shouldNotBe("valid");
+        the(newsletter).shouldNotBe("valid");
 		the(newsletter.errors().get("content")).shouldBeEqual("The content of this newsletter cannot be left empty");
-                the(newsletter.errors().get("date")).shouldBeEqual("Please enter the date you wish the newsletter to be published");
+        the(newsletter.errors().get("date")).shouldBeEqual("Please enter the date you wish the newsletter to be published");
 
 		//set attributes
 		newsletter.set("content", "some major content", "date", "2014-02-28");

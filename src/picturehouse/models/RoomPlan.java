@@ -8,6 +8,6 @@ import org.javalite.activejdbc.annotations.Table;
 @IdName("id")
 public class RoomPlan extends Model{
     static {
-        validatePresenceOf("seat_number").message("A seat number existing in the room is required");
+        validatePresenceOf("seat_number").message("A valid seat number is required");
     }    
 }

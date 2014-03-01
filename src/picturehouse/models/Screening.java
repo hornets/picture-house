@@ -5,8 +5,8 @@ import picturehouse.validators.CustomerExistsValidator;
 
 public class Screening extends Model {
     static {
-        validatePresenceOf("movie_id").message("This screening requires a movie id");
-        validatePresenceOf("price").message("This screening requires a price");
-        validatePresenceOf("start_date").message("Please enter the date this movie is going to start screening");
+        validatePresenceOf("movie_id").message("A movie id is required ");
+        validatePresenceOf("price").message("Please specify the price for this screening");
+        validatePresenceOf("start_date").message("Please enter the screening date for this movie");
     }    
 }

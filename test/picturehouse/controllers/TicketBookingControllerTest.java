@@ -39,14 +39,19 @@ public class TicketBookingControllerTest {
         new MovieController().create("Inception", "http://www.youtube.com", "good one", Date.valueOf("2011-12-25"));
         int movie_id =  Integer.parseInt(Movie.findFirst("title = 'Inception'").getString("id"));
         // create a screening
-        new Screening().create("movie_id", movie_id, "price", 12.9, "start_date", Date.valueOf("2011-12-25"));
+        //! IMPORTANT: CHANGE to screening controller
+        Screening screening = new Screening().create("movie_id", movie_id, "price", 12.9, "start_date", Date.valueOf("2011-12-25"));
         int screening_id =  Integer.parseInt(Customer.findFirst("username = 'johnDoe'").getString("id"));
 
         // Create a new customer record
         TicketBookingController controller = new TicketBookingController();
-        controller.create(customer_id, screening_id, "A1", true);
-        List<TicketBooking> ticketBookings = TicketBooking.where("seat = 'A1'");
+        controller.create(customer_id, screening_id, "1", true);
+        // make a booking
+        List<TicketBooking> ticketBookings = TicketBooking.where("seat = '1'");
         the(ticketBookings.size()).shouldBeEqual(1);
+        // ensure the seat has indeed been booked
+        // screening.isSeated(screening_id, )
+
     }
     @Test
     public void shouldReturnUnprintedTickets() {

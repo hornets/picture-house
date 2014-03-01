@@ -13,25 +13,25 @@ import picturehouse.models.Newsletter;
 
 /**
  *
- * @author Most likely Seva Baskin
+ * @author Vlad Valeanu
  */
 
 public class NewsletterControllerTest {
     public NewsletterControllerTest() {}
     
     //  Open database connection before each test and create a new transaction
-    @Before
-    public void before() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:8889/picturehouse_test", "root", "root");
-        Base.openTransaction();
-    }
+	@Before
+	public void before() {
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
+		Base.openTransaction();
+	}
 
     //  Close database connection before after each test and rollback (delete anything added by the test)
-    @After
-    public void after() {
-        Base.rollbackTransaction();
-        Base.close();
-    }
+	@After
+	public void after() {
+		Base.rollbackTransaction();
+		Base.close();
+	}
 
     @Test
     public void shouldCreateNewsletter() {

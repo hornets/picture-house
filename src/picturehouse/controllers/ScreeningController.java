@@ -11,9 +11,9 @@ public class ScreeningController {
     }
     public void create(Integer movie_id, Double price, Date start_date){
         new Screening().set("movie_id", movie_id)
-                         .set("price", price)
-                         .set("start_date", start_date)
-                         .saveIt();
+                       .set("price", price)
+                       .set("start_date", start_date)
+                       .saveIt();
     }
     public void destroy(int id){
         Screening s = Screening.findFirst("id = ?", id);
@@ -48,11 +48,11 @@ public class ScreeningController {
         } 
         return null;
     }
-    public boolean isSeated(Integer id, Integer seat){
-        RoomPlan room = RoomPlan.findFirst("seat_number = ?", seat);
+    public boolean isSeated(Integer screening_id, Integer seat_number){
+        RoomPlan room = RoomPlan.findFirst("seat_number = ?", seat_number);
         int seat_id =  Integer.parseInt(room.getString("id"));
         
-        SeatBooking booking = SeatBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, id);
+        SeatBooking booking = SeatBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, screening_id);
         
         return booking != null;        
     }

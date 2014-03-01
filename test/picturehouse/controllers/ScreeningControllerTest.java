@@ -18,7 +18,7 @@ public class ScreeningControllerTest {
     //  Open database connection before each test and create a new transaction
     @Before
     public void before() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:8889/picturehouse_test", "root", "root");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
         Base.openTransaction();
     }
 
@@ -112,7 +112,7 @@ public class ScreeningControllerTest {
         // return the newly created newsletter through method
         Screening screeningCache = controller.load(id);
         
-        System.out.println(id);
+        // System.out.println(id);
         
         // make sure the return movie is the expected movie
         assertEquals(screeningCache.getDate("start_date"), Date.valueOf("2014-02-28"));

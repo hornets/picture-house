@@ -10,7 +10,7 @@ public class SeatBookingTest {
     //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
-		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:8889/picturehouse_test", "root", "root");
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
 		Base.openTransaction();
 	}
 
@@ -21,6 +21,7 @@ public class SeatBookingTest {
 		Base.close();
 	}
 
+
 	public SeatBookingTest() {
 	}
 
@@ -29,7 +30,7 @@ public class SeatBookingTest {
 		SeatBooking booking = new SeatBooking();
 
 		//validation rules
-                the(booking).shouldNotBe("valid");
+        the(booking).shouldNotBe("valid");
 		the(booking.errors().get("seat_id")).shouldBeEqual("A seat id is required");
 		the(booking.errors().get("screening_id")).shouldBeEqual("A screening id is required");
 

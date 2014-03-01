@@ -124,5 +124,6 @@ CREATE TABLE `ticket_bookings` (
   `customer_id` int(11) NOT NULL,
   `screening_id` int(11) NOT NULL,
   `seat` varchar(240) NOT NULL,
+  `is_printed` boolean NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
