@@ -10,7 +10,7 @@ public class NewsletterTest {
     //  Open database connection before each test and create a new transaction
 	@Before
 	public void before() {
-		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://sql3.freesqldatabase.com:3306/sql331660", "sql331660", "bY9!dI1%");
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_test", "testuser", "testuserpassword");
 		Base.openTransaction();
 	}
 

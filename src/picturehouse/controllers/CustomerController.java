@@ -1,5 +1,6 @@
 package picturehouse.controllers;
 
+import org.javalite.activejdbc.validation.ValidationException;
 import picturehouse.models.Customer;
 
 /**
@@ -11,10 +12,13 @@ public class CustomerController {
     public CustomerController() {
     }
     public void create(String username, String password, String credit_card_number) {
-       new Customer().set("username", username)
-                     .set("password", password)
-                     .set("credit_card_number", credit_card_number)
-                     .saveIt();
+        // IMPORTANT: Don't use saveIt() method, as it doesn't run custom validation of username uniqueness
+        Customer c = new Customer().createIt("username", username, "password", password, "credit_card_number", credit_card_number);
+        if (c.save()) {
+        } else {
+            throw new ValidationException(c);
+        }
+        
     }
 
     boolean verifyCredentials(String username, String password) {
