@@ -13,12 +13,35 @@ public class CustomerController {
     }
     public void create(String username, String password, String credit_card_number) {
         // IMPORTANT: Don't use saveIt() method, as it doesn't run custom validation of username uniqueness
-        Customer c = new Customer().createIt("username", username, "password", password, "credit_card_number", credit_card_number);
-        if (c.save()) {
-        } else {
+        Customer c = new Customer();
+        c.set("username", username, "password", password, "credit_card_number", credit_card_number);
+        if (!c.save()) {
             throw new ValidationException(c);
         }
+
+//        Customer c = new Customer();
+//        c.set("username", username, "password", password, "credit_card_number", credit_card_number);
+//        c.validate();
+//        c.validate();
+//        System.out.println(c.errors());
+//        if (c.save()) {
+//        } else {
+//            throw new ValidationException(c);
+//        }
         
+
+//        Customer c = new Customer().createIt("username", username, "password", password, "credit_card_number", credit_card_number);
+//        if (!c.save()) {
+//            throw new ValidationException(c);
+//        }
+        
+        
+//        Customer c = new Customer().create("username", username, "password", password, "credit_card_number", credit_card_number);
+//        Customer c = new Customer();
+//        c.set("username", username, "password", password, "credit_card_number", credit_card_number);
+//        if (!c.save()) {
+//            throw new ValidationException(c);
+//        };
     }
 
     boolean verifyCredentials(String username, String password) {

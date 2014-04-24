@@ -114,6 +114,8 @@ public class CreateAccountView extends JFrame {
     
     public static void main(String[] args) {
         
+        // Better code org: http://docs.oracle.com/javase/tutorial/uiswing/examples/layout/GridBagLayoutDemoProject/src/layout/GridBagLayoutDemo.java
+        
         // Base.openTransaction();
         new CreateAccountView();
         // Base.rollbackTransaction();
