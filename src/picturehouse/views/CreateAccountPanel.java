@@ -21,14 +21,18 @@ import picturehouse.controllers.CustomerController;
  *
  * @author sevabaskin
  */
-public class CreateAccountJPanel extends javax.swing.JPanel {
+public class CreateAccountPanel extends javax.swing.JPanel {
     private JPanel parentPanel;
     private PictureHouse app;
 
     /**
      * Creates new form CreateAccountJPanel
      */
-    public CreateAccountJPanel(JPanel parentPanel, PictureHouse app) {
+    public CreateAccountPanel() {
+        initComponents();
+    }
+    
+    public CreateAccountPanel(JPanel parentPanel, PictureHouse app) {
         initComponents();
         this.parentPanel = parentPanel;
         this.app = app;
@@ -52,9 +56,10 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         creditCardLabel = new javax.swing.JLabel();
         creditCardField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        goBackButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
-        jLabel1.setText("Create an account:");
+        jLabel1.setText("Create an account");
 
         customerNameLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         customerNameLabel.setText("Customer Name");
@@ -71,10 +76,18 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
 
         creditCardField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jButton1.setText("Create Account");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        goBackButton.setText("Return to Main Screen");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBackButtonActionPerformed(evt);
             }
         });
 
@@ -85,14 +98,18 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(creditCardField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(customerNameLabel)
-                    .addComponent(passwordLabel)
-                    .addComponent(creditCardLabel)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(goBackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(creditCardField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(customerNameLabel)
+                            .addComponent(passwordLabel)
+                            .addComponent(creditCardLabel)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -106,18 +123,19 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customerNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(creditCardLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(creditCardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(creditCardField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -132,7 +150,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(100, 100, 100)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -144,16 +162,16 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
             CustomerController controller = new CustomerController();
             controller.create(customerNameField.getText(), passwordField.getText(), creditCardField.getText());
             Base.close();
-            // change view to next panel
-            CardLayout card = (CardLayout)parentPanel.getLayout();
-            card.show(parentPanel, "card3");
             // clear text field view
             customerNameField.setText("");
             passwordField.setText("");
             creditCardField.setText("");
             //       save authentication
             app.authorizeCurrentUser();
-            System.out.println(app.isCurrentUserAuthorized());
+            //System.out.println(app.isCurrentUserAuthorized());
+            // change view to next panel
+            CardLayout card = (CardLayout)parentPanel.getLayout();
+            card.show(parentPanel, "homePageCard");
         } catch (ValidationException e) {
             Map<String, String> errors = e.errors();
             String errorMsgs = "You've got the following errors:\n";
@@ -166,12 +184,17 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        CardLayout card = (CardLayout)parentPanel.getLayout();
+        card.show(parentPanel, "homePageCard");
+    }//GEN-LAST:event_goBackButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField creditCardField;
     private javax.swing.JLabel creditCardLabel;
     private javax.swing.JTextField customerNameField;
     private javax.swing.JLabel customerNameLabel;
+    private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
