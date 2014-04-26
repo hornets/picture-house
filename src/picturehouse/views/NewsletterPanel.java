@@ -27,19 +27,27 @@ public class NewsletterPanel extends javax.swing.JPanel {
     }
     public NewsletterPanel(MainFrame parentFrame) {
         initComponents();
+        this.parentFrame = parentFrame;
+        
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
         // retrieve latest newsletter data
         NewsletterController controller = new NewsletterController();
-        Newsletter nl = controller.loadNewsletter(Date.valueOf("2014-02-28"));
-        String content = nl.getString("content");
-        Date newsletterDate = Date.valueOf(nl.getString("date"));
-        Base.close();
-        // get newsletter's month name
-        String newsletterMonth = new SimpleDateFormat("MMMM").format(newsletterDate);
-        this.newsletterTitle.setText(newsletterMonth + " Newsletter");
-        this.parentFrame = parentFrame;
+        Newsletter newsletter = controller.loadLatestNewsletter();
+        String title;
+        String content;
+        if (newsletter == null) {
+            title = "No Newsletters Available";
+            content = "Please, come back later.";
+        } else {
+            // get newsletter's month name
+            Date newsletterDate = Date.valueOf(newsletter.getString("date"));
+            String newsletterMonth = new SimpleDateFormat("MMMM").format(newsletterDate);
+            title = newsletterMonth + " Newsletter";
+            content = newsletter.getString("content");
+        }
+        this.newsletterTitle.setText(title);
         this.newsletterTextArea.setText(content);
-        
+        Base.close();
     }
 
     /**
