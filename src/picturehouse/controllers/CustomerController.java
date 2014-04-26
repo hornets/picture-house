@@ -15,9 +15,11 @@ public class CustomerController {
         // IMPORTANT: Don't use saveIt() method, as it doesn't run custom validation of username uniqueness
         Customer c = new Customer();
         c.set("username", username, "password", password, "credit_card_number", credit_card_number);
+//        c.validate();
         if (!c.save()) {
             throw new ValidationException(c);
         }
+        // Compile this everytime!!!!!
 
 //        Customer c = new Customer();
 //        c.set("username", username, "password", password, "credit_card_number", credit_card_number);
@@ -44,9 +46,9 @@ public class CustomerController {
 //        };
     }
 
-    boolean verifyCredentials(String username, String password) {
+    public boolean verifyCredentials(String username, String password) {
         Customer customer = Customer.findFirst("username = ?", username);
-        return customer.getString("password").equals(password);
+        return customer == null ? false : customer.getString("password").equals(password);
     }
 
     public void update(int id, String username, String password, String credit_card_number) {

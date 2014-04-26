@@ -6,8 +6,8 @@
 
 package picturehouse.views;
 
-import java.awt.CardLayout;
-import javax.swing.JPanel;
+
+import javax.swing.JOptionPane;
 import picturehouse.PictureHouse;
 
 /**
@@ -16,8 +16,10 @@ import picturehouse.PictureHouse;
  */
 public class HomePagePanel extends javax.swing.JPanel {
 
-    private JPanel parentPanel;
     private PictureHouse app;
+    // TODO: alternatively store the reference in the PictureHouse app, so each child doesn't have to store reference to parent
+    //       maybe not, since not the most logical thing to do.
+    private MainFrame parentFrame;
     
     /**
      * Creates new form HomePagePanel
@@ -25,18 +27,13 @@ public class HomePagePanel extends javax.swing.JPanel {
     public HomePagePanel() {
         initComponents();
     }
-    public HomePagePanel(JPanel parentPanel, PictureHouse app) {
+    public HomePagePanel(PictureHouse app, MainFrame parentFrame) {
         initComponents();
-        this.parentPanel = parentPanel;
         this.app = app;
-        if (this.app.isCurrentUserAuthorized()) {
-            this.authorizationButton.setText("Log Out");
-            this.createAccountButton.setVisible(false);
-        } else {
-            this.authorizationButton.setText("Log In");
-        }
-    }    
-    
+        this.parentFrame = parentFrame;
+        updateView();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,12 +55,21 @@ public class HomePagePanel extends javax.swing.JPanel {
 
         readNewsletterButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         readNewsletterButton.setText("Read Newsletter");
+        readNewsletterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readNewsletterButtonActionPerformed(evt);
+            }
+        });
 
         printTicketButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         printTicketButton.setText("Print Tickets");
 
         authorizationButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        authorizationButton.setText("Log In");
+        authorizationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                authorizationButtonActionPerformed(evt);
+            }
+        });
 
         createAccountButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         createAccountButton.setText("Create Account");
@@ -121,9 +127,22 @@ public class HomePagePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
-        CardLayout card = (CardLayout)parentPanel.getLayout();
-        card.previous(parentPanel);
+        this.parentFrame.showCard("createAccountCard");
     }//GEN-LAST:event_createAccountButtonActionPerformed
+
+    private void authorizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authorizationButtonActionPerformed
+        if (this.app.isCurrentUserAuthorized()) {
+            this.app.deauthorizeCurrentUser();
+            this.updateView();
+            JOptionPane.showMessageDialog(this, "You have successfully logged out!");
+        } else {
+            this.parentFrame.showCard("signInCard");
+        }
+    }//GEN-LAST:event_authorizationButtonActionPerformed
+
+    private void readNewsletterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readNewsletterButtonActionPerformed
+        this.parentFrame.showCard("newsletterCard");
+    }//GEN-LAST:event_readNewsletterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -134,4 +153,15 @@ public class HomePagePanel extends javax.swing.JPanel {
     private javax.swing.JButton printTicketButton;
     private javax.swing.JButton readNewsletterButton;
     // End of variables declaration//GEN-END:variables
+
+    public void updateView() {
+        if (this.app.isCurrentUserAuthorized()) {
+            this.authorizationButton.setText("Log Out");
+            this.createAccountButton.setVisible(false);
+        } else {
+            this.createAccountButton.setVisible(true);
+            this.authorizationButton.setText("Log In");
+        }
+    }
+
 }

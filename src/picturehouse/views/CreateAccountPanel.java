@@ -8,12 +8,9 @@ package picturehouse.views;
 
 import java.awt.CardLayout;
 import java.util.Map;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.validation.ValidationException;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import picturehouse.PictureHouse;
 import picturehouse.controllers.CustomerController;
 
@@ -22,9 +19,9 @@ import picturehouse.controllers.CustomerController;
  * @author sevabaskin
  */
 public class CreateAccountPanel extends javax.swing.JPanel {
-    private JPanel parentPanel;
     private PictureHouse app;
-
+    private MainFrame parentFrame;
+    
     /**
      * Creates new form CreateAccountJPanel
      */
@@ -32,10 +29,10 @@ public class CreateAccountPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public CreateAccountPanel(JPanel parentPanel, PictureHouse app) {
+    public CreateAccountPanel(PictureHouse app, MainFrame parentFrame) {
         initComponents();
-        this.parentPanel = parentPanel;
         this.app = app;
+        this.parentFrame = parentFrame;
     }
 
     /**
@@ -55,7 +52,7 @@ public class CreateAccountPanel extends javax.swing.JPanel {
         passwordField = new javax.swing.JTextField();
         creditCardLabel = new javax.swing.JLabel();
         creditCardField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        createAccountButton = new javax.swing.JButton();
         goBackButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
@@ -76,11 +73,11 @@ public class CreateAccountPanel extends javax.swing.JPanel {
 
         creditCardField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton1.setText("Create Account");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        createAccountButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        createAccountButton.setText("Create Account");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                createAccountButtonActionPerformed(evt);
             }
         });
 
@@ -98,22 +95,19 @@ public class CreateAccountPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(goBackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(creditCardField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(customerNameLabel)
-                            .addComponent(passwordLabel)
-                            .addComponent(creditCardLabel)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(creditCardField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(customerNameLabel)
+                    .addComponent(passwordLabel)
+                    .addComponent(creditCardLabel)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {creditCardField, customerNameField, passwordField});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createAccountButton, creditCardField, creditCardLabel, customerNameField, customerNameLabel, goBackButton, jLabel1, passwordField, passwordLabel});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +127,7 @@ public class CreateAccountPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(creditCardField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -156,7 +150,7 @@ public class CreateAccountPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
         try {
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
             CustomerController controller = new CustomerController();
@@ -168,10 +162,8 @@ public class CreateAccountPanel extends javax.swing.JPanel {
             creditCardField.setText("");
             //       save authentication
             app.authorizeCurrentUser();
-            //System.out.println(app.isCurrentUserAuthorized());
-            // change view to next panel
-            CardLayout card = (CardLayout)parentPanel.getLayout();
-            card.show(parentPanel, "homePageCard");
+            this.parentFrame.updateCard("homePageCard");
+            this.parentFrame.showCard("homePageCard");
         } catch (ValidationException e) {
             Map<String, String> errors = e.errors();
             String errorMsgs = "You've got the following errors:\n";
@@ -182,20 +174,19 @@ public class CreateAccountPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, errorMsgs, "Validation Errors", JOptionPane.WARNING_MESSAGE);
             Base.close();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_createAccountButtonActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
-        CardLayout card = (CardLayout)parentPanel.getLayout();
-        card.show(parentPanel, "homePageCard");
+        this.parentFrame.showCard("homePageCard");
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createAccountButton;
     private javax.swing.JTextField creditCardField;
     private javax.swing.JLabel creditCardLabel;
     private javax.swing.JTextField customerNameField;
     private javax.swing.JLabel customerNameLabel;
     private javax.swing.JButton goBackButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField passwordField;

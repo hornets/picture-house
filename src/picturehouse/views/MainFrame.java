@@ -18,16 +18,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     // fix encapsulation
     public PictureHouse app;
-    public CardLayout cardLayout;
     /**
      * Creates new form MainJFrame
      */
     public MainFrame() {
         this.app = new PictureHouse();
         initComponents();
-        cardLayout = (CardLayout) jPanel1.getLayout();
     }
-
+    
+    
+ 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,17 +38,21 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        homePagePanel1 = new picturehouse.views.HomePagePanel(jPanel1, app);
-        createAccountPanel1 = new picturehouse.views.CreateAccountPanel(jPanel1, app);
+        mainPanel = new javax.swing.JPanel();
+        homePagePanel1 = new picturehouse.views.HomePagePanel(app, this);
+        createAccountPanel1 = new picturehouse.views.CreateAccountPanel(app, this);
+        signInPanel1 = new picturehouse.views.SignInPanel(app, this);
+        newsletterPanel1 = new picturehouse.views.NewsletterPanel(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.CardLayout());
-        jPanel1.add(homePagePanel1, "homePageCard");
-        jPanel1.add(createAccountPanel1, "createAccountCard");
+        mainPanel.setLayout(new java.awt.CardLayout());
+        mainPanel.add(homePagePanel1, "homePageCard");
+        mainPanel.add(createAccountPanel1, "createAccountCard");
+        mainPanel.add(signInPanel1, "signInCard");
+        mainPanel.add(newsletterPanel1, "newsletterCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,7 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -66,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -113,6 +118,20 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private picturehouse.views.CreateAccountPanel createAccountPanel1;
     private picturehouse.views.HomePagePanel homePagePanel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel mainPanel;
+    private picturehouse.views.NewsletterPanel newsletterPanel1;
+    private picturehouse.views.SignInPanel signInPanel1;
     // End of variables declaration//GEN-END:variables
+
+    
+    public void showCard(String cardName) {
+        CardLayout card = (CardLayout)this.mainPanel.getLayout();
+        card.show(this.mainPanel, cardName);
+    }
+       
+    void updateCard(String cardName) {
+        // implement a better version if more cards need view updates
+        if (cardName == "homePageCard")
+            this.homePagePanel1.updateView();
+    }
 }
