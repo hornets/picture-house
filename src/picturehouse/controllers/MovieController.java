@@ -1,6 +1,9 @@
 package picturehouse.controllers;
 import picturehouse.models.Movie;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -16,7 +19,7 @@ public class MovieController {
                    .set("trailer_url", trailer_url)
                    .set("synopsis", synopsis)
                    .set("start_date", start_date)
-                   .saveIt();
+                   .save();
     }
     public void update(int id, String title, String trailer_url, String synopsis, Date start_date){
         Movie.findFirst("id = ?", id).set("title", title)
@@ -34,5 +37,37 @@ public class MovieController {
     public List<Movie> showMoviesAfter(Date premieredAfter){
         List<Movie> movies = Movie.where("start_date > ?", premieredAfter);
         return movies;
+    }
+
+
+    List<Movie> showLastWeekMovies() {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        // Get last Monday
+        c.add(Calendar.DATE, -7);
+        String lastMonday = df.format(c.getTime());
+        // Get last Sunday
+        c.add(Calendar.DATE, 6);
+        String lastSunday = df.format(c.getTime());
+        return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", lastMonday, lastSunday);
+    }
+
+    List<Movie> showThisAndNextWeekMovies() {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        // Get this Monday date
+        String thisMonday = df.format(c.getTime());
+        System.out.println(thisMonday);
+        // Get next Sunday date
+        c.add(Calendar.DATE, 13);
+        String nextSunday = df.format(c.getTime());
+        System.out.println(nextSunday);
+        return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", thisMonday, nextSunday);
     }
 }

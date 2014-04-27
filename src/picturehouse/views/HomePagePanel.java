@@ -52,6 +52,11 @@ public class HomePagePanel extends javax.swing.JPanel {
 
         browseMoviesButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         browseMoviesButton.setText("Browse Movies");
+        browseMoviesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseMoviesButtonActionPerformed(evt);
+            }
+        });
 
         readNewsletterButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         readNewsletterButton.setText("Read Newsletter");
@@ -88,20 +93,18 @@ public class HomePagePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(browseMoviesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(readNewsletterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(printTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(authorizationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                    .addComponent(createAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(browseMoviesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(readNewsletterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(printTicketButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(authorizationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addComponent(createAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -143,6 +146,10 @@ public class HomePagePanel extends javax.swing.JPanel {
     private void readNewsletterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readNewsletterButtonActionPerformed
         this.parentFrame.showCard("newsletterCard");
     }//GEN-LAST:event_readNewsletterButtonActionPerformed
+
+    private void browseMoviesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseMoviesButtonActionPerformed
+        this.parentFrame.showCard("browseMoviesCard");
+    }//GEN-LAST:event_browseMoviesButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

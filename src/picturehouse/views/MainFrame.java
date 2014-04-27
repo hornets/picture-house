@@ -43,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
         createAccountPanel1 = new picturehouse.views.CreateAccountPanel(app, this);
         signInPanel1 = new picturehouse.views.SignInPanel(app, this);
         newsletterPanel1 = new picturehouse.views.NewsletterPanel(this);
+        browseMoviesPanel1 = new picturehouse.views.BrowseMoviesPanel(app, this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -53,6 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(createAccountPanel1, "createAccountCard");
         mainPanel.add(signInPanel1, "signInCard");
         mainPanel.add(newsletterPanel1, "newsletterCard");
+        mainPanel.add(browseMoviesPanel1, "browseMoviesCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private picturehouse.views.BrowseMoviesPanel browseMoviesPanel1;
     private picturehouse.views.CreateAccountPanel createAccountPanel1;
     private picturehouse.views.HomePagePanel homePagePanel1;
     private javax.swing.JPanel mainPanel;

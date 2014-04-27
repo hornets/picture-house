@@ -95,6 +95,16 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="picturehouse.views.BrowseMoviesPanel" name="browseMoviesPanel1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new picturehouse.views.BrowseMoviesPanel(app, this)"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="browseMoviesCard"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

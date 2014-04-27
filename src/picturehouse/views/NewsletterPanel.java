@@ -79,7 +79,7 @@ public class NewsletterPanel extends javax.swing.JPanel {
         newsletterTextArea.setEnabled(false);
         jScrollPane1.setViewportView(newsletterTextArea);
 
-        goBackButton.setText("Return to Main Screen");
+        goBackButton.setText("< Return to Main Screen");
         goBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goBackButtonActionPerformed(evt);

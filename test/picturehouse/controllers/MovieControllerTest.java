@@ -3,6 +3,9 @@ package picturehouse.controllers;
 
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import org.javalite.activejdbc.Base;
 import static org.javalite.test.jspec.JSpec.the;
@@ -84,7 +87,46 @@ public class MovieControllerTest {
         movies = controller.showMoviesAfter(Date.valueOf("2011-12-26"));
         assertEquals(movies.size(), 1);
     }
-        @Test
+
+    @Test
+    public void shouldReturnNextWeekMovies() {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        c.add(Calendar.DATE, -5);
+        String lastWednesdayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, 5+1);
+        String thisTuesdayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, 5+5);
+        String nextFridayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, -35);
+        String lastMonthDate = df.format(c.getTime());
+
+        // Create and retrieve new movie record
+        MovieController controller = new MovieController();
+        controller.create("Inception", "http://www.youtube.com", "good one", Date.valueOf(lastWednesdayDate));
+        controller.create("Flintstones", "http://www.youtube.com", "good one", Date.valueOf(thisTuesdayDate));
+        controller.create("Good Will Hunting", "http://www.youtube.com", "good one", Date.valueOf(nextFridayDate));
+        controller.create("Pulp fiction", "http://www.youtube.com", "good one", Date.valueOf(lastMonthDate));
+        
+        Movie movie = null;
+        List<Movie> lastWeekMovies = controller.showLastWeekMovies();
+        assertEquals(lastWeekMovies.size(), 1);
+        movie = lastWeekMovies.get(0);
+        assertEquals(movie.getString("title"), "Inception");
+        
+        List<Movie> nextWeekMovies = controller.showThisAndNextWeekMovies();
+        assertEquals(nextWeekMovies.size(), 2);
+        movie = nextWeekMovies.get(0);
+        assertEquals(movie.getString("title"), "Flintstones");
+        movie = nextWeekMovies.get(1);
+        assertEquals(movie.getString("title"), "Good Will Hunting");
+        
+    }
+    
+    @Test
     public void shouldReturnAMovie() {
         // Create and retrieve new movie record
         MovieController controller = new MovieController();
@@ -98,5 +140,5 @@ public class MovieControllerTest {
         // make sure the return movie is the expected movie
         assertEquals(movie.getString("title"), "Inception");
     }
-    
+
 }
