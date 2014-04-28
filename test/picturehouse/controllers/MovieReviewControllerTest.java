@@ -1,8 +1,10 @@
 package picturehouse.controllers;
 
+import java.util.List;
 import org.javalite.activejdbc.Base;
 import static org.javalite.test.jspec.JSpec.the;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +57,24 @@ public class MovieReviewControllerTest {
         controller.destroy(movie_review_id);
         assertNull(MovieReview.findFirst("id = ?", movie_review_id));
     }
+    @Test
+    public void testRetrieveMovieReviews() {
+        // create fake ids
+		int customer_id = 1;
 
+
+		// test creating a new movie review
+		MovieReviewController controller = new MovieReviewController();
+		controller.create(customer_id, 1, "very nice movie");
+        controller.create(customer_id, 2, "very nice movie");
+        controller.create(customer_id, 2, "horrible");
+        
+        // retrive reviews for movie with id=2
+        
+        List<MovieReview> movieReviewList = controller.getReviewsByMovieId(2);
+        assertEquals(movieReviewList.size(), 2);
+        movieReviewList = controller.getReviewsByMovieId(1);
+        assertEquals(movieReviewList.size(), 1);
+    }
 
 }

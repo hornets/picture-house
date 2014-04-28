@@ -40,7 +40,7 @@ public class MovieController {
     }
 
 
-    List<Movie> showLastWeekMovies() {
+    public List<Movie> showLastWeekMovies() {
         // Get calendar set to current date and time
         Calendar c = Calendar.getInstance();
         // Set the calendar to monday of the current week
@@ -55,7 +55,7 @@ public class MovieController {
         return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", lastMonday, lastSunday);
     }
 
-    List<Movie> showThisAndNextWeekMovies() {
+    public List<Movie> showThisAndNextWeekMovies() {
         // Get calendar set to current date and time
         Calendar c = Calendar.getInstance();
         // Set the calendar to monday of the current week
@@ -63,11 +63,9 @@ public class MovieController {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         // Get this Monday date
         String thisMonday = df.format(c.getTime());
-        System.out.println(thisMonday);
         // Get next Sunday date
         c.add(Calendar.DATE, 13);
         String nextSunday = df.format(c.getTime());
-        System.out.println(nextSunday);
         return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", thisMonday, nextSunday);
     }
 }

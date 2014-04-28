@@ -89,7 +89,7 @@ public class MovieControllerTest {
     }
 
     @Test
-    public void shouldReturnNextWeekMovies() {
+    public void shouldReturnLastThisAndNextWeekMovies() {
         // Get calendar set to current date and time
         Calendar c = Calendar.getInstance();
         // Set the calendar to monday of the current week
