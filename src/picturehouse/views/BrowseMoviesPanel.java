@@ -76,7 +76,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         selectDateComboBox = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         movieTitle = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        bookNowButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         movieSynopsis = new javax.swing.JTextArea();
@@ -131,8 +131,13 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
 
         movieTitle.setFont(new java.awt.Font("Lucida Grande", 0, 25)); // NOI18N
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton3.setText("Book Now");
+        bookNowButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        bookNowButton.setText("Book Now");
+        bookNowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookNowButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Synopsis");
@@ -185,7 +190,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(movieTitle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
-                                .addComponent(jButton3)))))
+                                .addComponent(bookNowButton)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -194,7 +199,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(movieTitle)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bookNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,12 +243,20 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         if( evt.getStateChange() == ItemEvent.SELECTED ) {
             if (currentWeekMoviesSelected()) {
                 movieListData.updateWithThisAndNextWeekMovies();
+                bookNowButton.setEnabled(true);
             } else if (lastWeekMoviesSelected()) {
                 movieListData.updateWithLastWeekMovies();
+                // disable bookNowButton if there are no more screenings for this movie
+                bookNowButton.setEnabled(false);
             }
             repaintMovieList();
         }
     }//GEN-LAST:event_selectDateComboBoxItemStateChanged
+
+    private void bookNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookNowButtonActionPerformed
+        this.app.setSelectedMovie(getCurrentlySelectedMovie());
+        parentFrame.showCard("screeningsCard");
+    }//GEN-LAST:event_bookNowButtonActionPerformed
     
     public void updateView() {
         reloadMovieList();
@@ -254,9 +267,9 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         Base.close();
         repaintMovieList();
         if (this.app.isCurrentUserAuthorized()) {
-            this.goToWriteReviewCardButton.setVisible(true);
+            this.goToWriteReviewCardButton.setEnabled(true);
         } else {
-            this.goToWriteReviewCardButton.setVisible(false);
+            this.goToWriteReviewCardButton.setEnabled(false);
         }
     }
     private void reloadMovieList() {
@@ -364,9 +377,9 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bookNowButton;
     private javax.swing.JButton goBackButton;
     private javax.swing.JButton goToWriteReviewCardButton;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

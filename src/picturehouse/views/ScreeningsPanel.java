@@ -2,24 +2,66 @@
 package picturehouse.views;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.javalite.activejdbc.Base;
+import picturehouse.PictureHouse;
+import picturehouse.controllers.ScreeningController;
+import picturehouse.models.Movie;
+import picturehouse.models.Screening;
 import picturehouse.models.Seat;
+import picturehouse.models.TicketBooking;
 
 /**
  *
  * @author sevabaskin
  */
 public class ScreeningsPanel extends javax.swing.JPanel {
-    private List<Seat> seatsList;
+    
+    private PictureHouse app;
+    private MainFrame parentFrame;
+    private ScreeningsListData screeningsListData;
+    private Component[] seatButtonsArray;
+    
     /**
      * Creates new form screeningsPanel
      */
     public ScreeningsPanel() {
         initComponents();
-        getAllSeatButton();
+    }
+    
+    public ScreeningsPanel(PictureHouse app, MainFrame parentFrame) {
+        initComponents();
+        // store all seat buttons in an array
+        seatButtonsArray = seatPanel.getComponents();
+        this.app = app;
+        this.parentFrame = parentFrame;
+        
+        // automatically calls updateSeatButtons which disables them, since no screenings are selected on app's boot
+        this.screeningsListData = new ScreeningsListData();
+        this.screeningsJList.setModel(screeningsListData);
+
+        
+        // paints seat numbers on buttons
+        paintSeatButtons();
+        
+        // listens for selections on screeningsJList; updates buttons if a new screening is selected
+        // the listener is added after screeningsListData is instantiated and set as a model for screeningsJList
+        // since updateSeatButtons() needs to know if screeningsListData hasScreeningsFor current movie for 
+        screeningsJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    updateSeatButtons();
+                }
+            }
+        });
     }
 
     /**
@@ -34,7 +76,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        screeningsJList = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -42,7 +84,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        goBackButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -122,13 +164,11 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Choose a screening:");
 
-        jList1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setToolTipText("");
+
+        screeningsJList.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        screeningsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(screeningsJList);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -188,11 +228,11 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7)))
         );
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton1.setText("< Return to Movie Browsing");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goBackButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        goBackButton.setText("< Return to Movie Browsing");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goBackButtonActionPerformed(evt);
             }
         });
 
@@ -203,8 +243,8 @@ public class ScreeningsPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+                    .addComponent(goBackButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -212,14 +252,14 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -671,33 +711,135 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        this.parentFrame.showCard("browseMoviesCard");
+    }//GEN-LAST:event_goBackButtonActionPerformed
 
     
+    void updateView() {
+        reloadScreeningsJList();
+        updateSeatButtons();
+    }
+    void reloadScreeningsJList() {
+        // reload data from DB into screeningsListData
+        screeningsListData.resetScreeningsListData();
+        // repaint screeningsJList with fresh data
+        
+        screeningsJList.repaint();
+        screeningsJList.setSelectedIndex(0);
+    }
+    
+    
+    
+    class ScreeningsListData extends AbstractListModel {
+        String[] strings;
+        String[] screeningTimesArray;
+        List<Screening> screeningsList;
+        String   noScreeningsAvailableMsg = "No screenings yet";
+        String   noMoviesSelectedMsg = "Select a movie first";
+
+        public ScreeningsListData() {
+            loadScreeningsList();
+            // load this and next week movie names into jList
+            strings = screeningTimesArray;
+        }
+        void loadScreeningsList() {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Movie selectedMovie = app.getSelectedMovie();
+            if (selectedMovie == null) {
+                // load error message into list if no movies have been selected
+                screeningTimesArray = new String[1];
+                screeningTimesArray[0] = noMoviesSelectedMsg;
+            } else {
+                // load screenings
+                ScreeningController controller = new ScreeningController();
+                screeningsList = controller.showCurrentScreeningsForMovie(selectedMovie.getInteger("id"));
+                // convert screenings to strings
+                if (screeningsList.isEmpty()) {
+                    screeningTimesArray = new String[1];
+                    screeningTimesArray[0] = noScreeningsAvailableMsg;
+                } else {
+                    screeningTimesArray = new String[screeningsList.size()];
+                    for (int i = 0; i < screeningsList.size(); i++)
+                        screeningTimesArray[i] = new SimpleDateFormat("EEE dd MMM HH:mm").format(screeningsList.get(i).getTimestamp("start_date"));
+                }
+            }
+            Base.close();
+        }
+        void resetScreeningsListData(){
+            loadScreeningsList();
+            // load this and next week movie names into jList
+            strings = screeningTimesArray;
+        }
+        public Screening getScreeningAtIndex(int index) {
+            return screeningsList.get(index);
+        }
+        public boolean hasScreeningsForThisMovie() {
+            return !screeningsList.isEmpty();
+        }
+        
+        public int getSize() {
+            return strings.length;
+        }
+        public Object getElementAt(int index) {
+            return strings[index];
+        }
+    }
     
     public void getSeats() {
         
     }
     
-    public void getAllSeatButton() {
+    public void updateSeatButtons() {
+        if (screeningsListData.hasScreeningsForThisMovie()) {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            List<Seat> seatsList = Seat.findAll();
+            Screening currentScreening = getCurrentlySelectedScreening();
+
+
+            Component[] seatButtonsArray = seatPanel.getComponents();
+            JToggleButton button;
+            // watch out for NullPointerException || OutOfBoundArray.. at boottime when no screening is selected yet
+            for (int i=0; i < seatButtonsArray.length; i++) {
+                button = (JToggleButton) seatButtonsArray[i];
+                // if this seat is booked, disable the button
+                if (currentScreening.isSeatBooked(seatsList.get(i).getInteger("id")))
+                    button.setEnabled(false);
+            }
+            Base.close();
+        } else {
+            // disable all buttons, since no screenings are available
+            this.disableAllSeatButtons();
+        }
+    }
+    void paintSeatButtons() {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
-        seatsList = Seat.findAll();
-        
-        Component[] seatButtonsArray = seatPanel.getComponents();
+        List<Seat> seatsList = Seat.findAll();
         JToggleButton button;
-        for (int i=0; i < seatButtonsArray.length; i++) {
-            button = (JToggleButton) seatButtonsArray[i];
+        for (int i=0; i < this.seatButtonsArray.length; i++) {
+            button = (JToggleButton) this.seatButtonsArray[i];
             button.setText(seatsList.get(i).getString("row_letter") + seatsList.get(i).getString("seat_number"));
         }
         Base.close();
     }
+    void disableAllSeatButtons() {
+        JToggleButton button;
+        for (int i=0; i < this.seatButtonsArray.length; i++) {
+            button = (JToggleButton) this.seatButtonsArray[i];
+            button.setEnabled(false);
+        }
+    }
+    
+    
+    Screening getCurrentlySelectedScreening() {
+        return screeningsListData.getScreeningAtIndex(screeningsJList.getSelectedIndex());
+    }
+    
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -708,7 +850,6 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -783,6 +924,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton70;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JToggleButton jToggleButton9;
+    private javax.swing.JList screeningsJList;
     private javax.swing.JPanel seatPanel;
     // End of variables declaration//GEN-END:variables
 }

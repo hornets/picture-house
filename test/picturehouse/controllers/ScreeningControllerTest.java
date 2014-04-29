@@ -1,6 +1,9 @@
 package picturehouse.controllers;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import org.javalite.activejdbc.Base;
 import static org.javalite.test.jspec.JSpec.the;
@@ -85,6 +88,7 @@ public class ScreeningControllerTest {
         ScreeningController controller = new ScreeningController();
         controller.create(1,10.00, Date.valueOf("2014-02-28"));
         controller.create(2,30.00, Date.valueOf("2014-03-12"));
+        controller.create(2,30.00, Date.valueOf("2014-03-14"));
 
         // make sure no screenings are returned when wrong date is selected
         List<Screening> screenings = controller.showScreeningsAfter(Date.valueOf("2014-03-28"));
@@ -92,10 +96,44 @@ public class ScreeningControllerTest {
         
         // make sure that correct number of screenings are returned given the correct date
         screenings = controller.showScreeningsAfter(Date.valueOf("2014-01-25"));
-        assertEquals(screenings.size(), 2);
+        assertEquals(screenings.size(), 3);
         
         screenings = controller.showScreeningsAfter(Date.valueOf("2014-03-01"));
-        assertEquals(screenings.size(), 1);
+        assertEquals(screenings.size(), 2);
+    }
+    
+    
+    @Test
+    public void shouldReturnAListOfScreeningsForThisAndNextWeekForGivenMovie() {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        c.add(Calendar.DATE, -5);
+        String lastWednesdayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, 5+1);
+        String thisTuesdayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, 5+5);
+        String nextFridayDate = df.format(c.getTime());
+        c.add(Calendar.DATE, -35);
+        String lastMonthDate = df.format(c.getTime());
+
+        // Create two screening records
+        ScreeningController controller = new ScreeningController();
+        controller.create(1,10.00, Date.valueOf(lastWednesdayDate));
+        controller.create(2,30.00, Date.valueOf(thisTuesdayDate));
+        controller.create(2,15.00, Date.valueOf(nextFridayDate));
+        controller.create(2,17.00, Date.valueOf(lastMonthDate));
+        
+        
+        List<Screening> screenings = controller.showCurrentScreeningsForMovie(2);
+        assertEquals(screenings.size(), 2);
+        // make sure the right screenings are returned
+        assertEquals(screenings.get(0).getString("Price"), "30");
+        assertEquals(screenings.get(1).getString("Price"), "15");
+        
+        
     }
     
     @Test

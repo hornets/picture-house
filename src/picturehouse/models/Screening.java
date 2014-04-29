@@ -15,9 +15,13 @@ public class Screening extends Model {
 
     public boolean isSeatBooked(int seat_number, String row_letter){
         Seat seat = Seat.findFirst("seat_number = ? AND row_letter = ?", seat_number, row_letter);
-        int seat_id =  Integer.parseInt(seat.getString("id"));
+        int seat_id = seat.getInteger("id");
         TicketBooking booking = TicketBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, getString("id"));
         
+        return booking != null;        
+    }
+    public boolean isSeatBooked(int seat_id){
+        TicketBooking booking = TicketBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, getString("id"));
         return booking != null;        
     }
 }

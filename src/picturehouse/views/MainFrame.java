@@ -46,11 +46,14 @@ public class MainFrame extends javax.swing.JFrame {
         newsletterPanel1 = new picturehouse.views.NewsletterPanel(this);
         browseMoviesPanel1 = new picturehouse.views.BrowseMoviesPanel(app, this);
         writeReviewPanel1 = new picturehouse.views.WriteReviewPanel(app, this);
+        screeningsPanel1 = new picturehouse.views.ScreeningsPanel(app, this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 900));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
+        mainPanel.setMaximumSize(new java.awt.Dimension(1000, 1000));
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(homePagePanel1, "homePageCard");
         mainPanel.add(createAccountPanel1, "createAccountCard");
@@ -58,6 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(newsletterPanel1, "newsletterCard");
         mainPanel.add(browseMoviesPanel1, "browseMoviesCard");
         mainPanel.add(writeReviewPanel1, "writeReviewCard");
+        mainPanel.add(screeningsPanel1, "screeningsCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +130,7 @@ public class MainFrame extends javax.swing.JFrame {
     private picturehouse.views.HomePagePanel homePagePanel1;
     private javax.swing.JPanel mainPanel;
     private picturehouse.views.NewsletterPanel newsletterPanel1;
+    private picturehouse.views.ScreeningsPanel screeningsPanel1;
     private picturehouse.views.SignInPanel signInPanel1;
     private picturehouse.views.WriteReviewPanel writeReviewPanel1;
     // End of variables declaration//GEN-END:variables
@@ -149,6 +154,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         if (cardName == "writeReviewCard") {
             this.writeReviewPanel1.updateView();
+            return;
+        }
+        if (cardName == "screeningsCard") {
+            this.screeningsPanel1.updateView();
             return;
         }
             

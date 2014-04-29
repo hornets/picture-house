@@ -1,5 +1,8 @@
 package picturehouse.controllers;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import picturehouse.models.Seat;
 import picturehouse.models.Screening;
@@ -13,7 +16,7 @@ public class ScreeningController {
         new Screening().set("movie_id", movie_id)
                        .set("price", price)
                        .set("start_date", start_date)
-                       .saveIt();
+                       .save();
     }
     public void destroy(int id){
         Screening s = Screening.findFirst("id = ?", id);
@@ -32,12 +35,22 @@ public class ScreeningController {
         return null;
     }
     public List<Screening> showScreeningsAfter(Date start_date){
-        List<Screening> screeningList = Screening.where("start_date > ?", start_date);
-        
-        if(screeningList != null){
-            return screeningList;
-        }
-        return null;
+        return Screening.where("start_date > ?", start_date);
+    }
+    public List<Screening> showCurrentScreeningsForMovie(int movie_id) {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        // Get this Monday date
+        String thisMonday = df.format(c.getTime());
+        thisMonday += " 00:00:00";
+        // Get next Sunday date
+        c.add(Calendar.DATE, 13);
+        String nextSunday = df.format(c.getTime());
+        nextSunday+=" 23:59:59";
+        return Screening.where("movie_id = ? AND start_date BETWEEN ? AND ? ORDER BY start_date ASC", movie_id, thisMonday, nextSunday);        
     }
     
     // load screening based on id

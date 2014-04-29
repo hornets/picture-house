@@ -15,7 +15,7 @@ public class TicketBookingController {
                            .set("screening_id", screening_id)
                            .set("seat_id", seat_id)
                            .set("is_printed", is_printed)
-                           .saveIt();
+                           .save();
     }
     public List<TicketBooking> returnUnprintedTickets(int customer_id) {
         return TicketBooking.where("customer_id = ? AND is_printed = ?", customer_id, false);

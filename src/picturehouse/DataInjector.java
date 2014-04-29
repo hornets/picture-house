@@ -7,13 +7,17 @@
 package picturehouse;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.javalite.activejdbc.Base;
 import picturehouse.controllers.MovieController;
 import picturehouse.controllers.MovieReviewController;
+import picturehouse.controllers.ScreeningController;
+import picturehouse.models.Screening;
 import picturehouse.models.Seat;
+import picturehouse.models.TicketBooking;
 
 /**
  *
@@ -51,7 +55,7 @@ public class DataInjector {
 //        controller.create(1, 3, "very nice movie");
 //        Base.close();
         
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
 //        String[] letters = {"A", "B", "C", "D", "E", "F", "G"};
 //        for (String letter : letters) {
 //            for (int j = 1; j < 11; j++) {
@@ -59,6 +63,21 @@ public class DataInjector {
 //            }
 //            
 //        }
-//        Base.close();
+//
+//        new Screening().set("movie_id", 2)
+//                       .set("price", 12.13)
+//                       .set("start_date", Timestamp.valueOf("2014-05-01 12:00:00"))
+//                       .save();
+        
+//                new TicketBooking().set("customer_id", 1)
+//                           .set("screening_id", 4)
+//                           .set("seat_id", 2)
+//                           .set("is_printed", true)
+//                           .save();
+        
+//
+        Base.close();
+        
+        
     }
 }
