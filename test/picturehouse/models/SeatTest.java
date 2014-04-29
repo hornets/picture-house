@@ -32,11 +32,11 @@ public class SeatTest {
 		//validation rules
         the(seat).shouldNotBe("valid");
 		the(seat.errors().get("seat_number")).shouldBeEqual("A valid seat number is required");
-		the(seat.errors().get("row_number")).shouldBeEqual("A valid row number is required");
+		the(seat.errors().get("row_letter")).shouldBeEqual("A valid row letter is required");
 
 		//set attributes
 		seat.set("seat_number", 1);
-		seat.set("row_number", 1);
+		seat.set("row_letter", 1);
 		the(seat).shouldBe("valid");
 	}
 }

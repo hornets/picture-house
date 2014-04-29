@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import org.javalite.activejdbc.Base;
 import picturehouse.PictureHouse;
 import picturehouse.controllers.CustomerController;
+import picturehouse.models.Customer;
 
 /**
  *
@@ -142,14 +143,14 @@ public class SignInPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-        CustomerController controller = new CustomerController();
         if (customerNameField.getText().equals("") || passwordField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Password or Customer name fields cannot be blank", "Input Errors", JOptionPane.WARNING_MESSAGE);
         } else {
+            CustomerController controller = new CustomerController();
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
             if (controller.verifyCredentials(customerNameField.getText(), passwordField.getText())) {
-                app.authorizeCurrentUser();
-                this.parentFrame.updateCard("homePageCard");
+                this.app.authorizeCurrentUser();
+                this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
                 this.parentFrame.showCard("homePageCard");
                 // clear text field view
                 customerNameField.setText("");

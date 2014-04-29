@@ -95,7 +95,7 @@ DROP TABLE IF EXISTS `seats`;
 CREATE TABLE `seats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seat_number` int(11) NOT NULL,
-  `row_number` int(11) NOT NULL,
+  `row_letter` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

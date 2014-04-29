@@ -38,21 +38,16 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
     }
     public BrowseMoviesPanel(PictureHouse app, MainFrame parentFrame) {
         initComponents();
+        // update view when a different movie is sellected
+        selectDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "This week movies", "Last week movies" }));
         this.app = app;
         this.parentFrame = parentFrame;
-        // load necessary movies
+        reloadMovieList();
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
-        MovieController controller = new MovieController();
-        lastWeekMovies = controller.showLastWeekMovies();
-        thisAndNextWeekMovies = controller.showThisAndNextWeekMovies();
-        
-        // adjust GUI and load data into it
-        selectDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "This week movies", "Last week movies" }));
-        selectDateComboBox.setSelectedIndex(0);
         movieListData = new MovieListData();
         movieListPane.setModel(movieListData);
         Base.close();
-        // update view when a different movie is sellected
+        
         movieListPane.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -61,85 +56,10 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                 }
             }
         });
-        repaintMovieList();
-        paintCurrentlySelectedMovie();
+//        updateView();
     }
 
-    public void paintMovie(int index) {
-        Movie movie;
-        if (currentWeekMoviesSelected()) {
-            movie = thisAndNextWeekMovies.get(index);
-        } else {
-            movie = lastWeekMovies.get(index);
-        }
-        movieTitle.setText(movie.getString("title"));
-        movieSynopsis.setText(movie.getString("synopsis"));
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
-        MovieReviewController controller = new MovieReviewController();
-        List<MovieReview> movieReviewList = controller.getReviewsByMovieId(movie.getInteger("id"));
-        String movieReviewsString = "";
-        if (movieReviewList.isEmpty()) {
-            movieReviewsString = "<html><body>No reviews have been written for this movie yet. If you watched this movie, you can leave a review by clicking 'Write Review' button above.</body></html>";
-        } else {
-            movieReviewsString += "<html><head></head><body>";
-            for (MovieReview movieReview : movieReviewList) {
-                movieReviewsString += String.format("<div style=\"margin: 5px 10px 30px 10px;\"><h2 class=\"header\">%s</h2><p>%s</p></div><hr>",
-                                                    Customer.findFirst("id =?", movieReview.getString("customer_id")).getString("username"),
-                                                    movieReview.getString("content"));
-            }
-            movieReviewsString += "</body></html>";
-        }
-        this.movieReviewsEditorPane.setText(movieReviewsString);
-         
-        Base.close();
-    }
-    
-class MovieListData extends AbstractListModel {
-    String[] strings;
-    String[] thisAndNextWeekMovieNames;
-    String[] lastWeekMovieNames;
-    String noMoviesAvailableMsg = "<html>No movies available<br>during selected time<br>period. Select a<br>different period<br>in the box above</html>";
-    
-    public MovieListData() {
-        // create array of movie names
-        // handle null
-        if (thisAndNextWeekMovies.isEmpty()) {
-            thisAndNextWeekMovieNames = new String[1];
-            thisAndNextWeekMovieNames[0] = noMoviesAvailableMsg;
-            System.out.println("reached");
-        } else {
-            thisAndNextWeekMovieNames = new String[thisAndNextWeekMovies.size()];
-            for (int i = 0; i < thisAndNextWeekMovies.size(); i++)
-                thisAndNextWeekMovieNames[i] = thisAndNextWeekMovies.get(i).getString("title");
-        }
-        if (lastWeekMovies.isEmpty()) {
-            lastWeekMovieNames = new String[1];
-            lastWeekMovieNames[0] = noMoviesAvailableMsg;
-        } else {
-            lastWeekMovieNames = new String[lastWeekMovies.size()];
-            for (int i = 0; i < lastWeekMovies.size(); i++)
-                lastWeekMovieNames[i] = lastWeekMovies.get(i).getString("title");
-        }        
-        // load this and next week movie names into jList
-        strings = thisAndNextWeekMovieNames;
-    }
 
-    public int getSize() {
-        return strings.length;
-    }
-
-    public Object getElementAt(int index) {
-        return strings[index];
-    }
-    
-    public void updateWithLastWeekMovies() {
-        strings = lastWeekMovieNames;
-    }
-    public void updateWithThisAndNextWeekMovies() {
-        strings = thisAndNextWeekMovieNames;
-    }
-}
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,7 +83,7 @@ class MovieListData extends AbstractListModel {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         movieReviewsEditorPane = new javax.swing.JEditorPane();
-        jButton1 = new javax.swing.JButton();
+        goToWriteReviewCardButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 547));
 
@@ -210,7 +130,6 @@ class MovieListData extends AbstractListModel {
         );
 
         movieTitle.setFont(new java.awt.Font("Lucida Grande", 0, 25)); // NOI18N
-        movieTitle.setText("Good Will Hunting");
 
         jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jButton3.setText("Book Now");
@@ -230,18 +149,18 @@ class MovieListData extends AbstractListModel {
         movieReviewsEditorPane.setEditable(false);
         movieReviewsEditorPane.setBackground(java.awt.SystemColor.window);
         movieReviewsEditorPane.setContentType("text/html"); // NOI18N
-        movieReviewsEditorPane.setText("<html>\n<head>\n<head>\n</head>\n<body style=\"font-family:Lucida grande\">\n<div style=\"margin: 5px 10px 30px 10px;\">\n<h2 class=\"header\">armand_baboian</h2>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n</div>\n<hr>\n<div style=\"margin: 5px 10px 30px 10px;\">\n<p class=\"header\">akshay93</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n</div>\n</body>\n</html>");
+        movieReviewsEditorPane.setText("");
         movieReviewsEditorPane.setToolTipText("");
         movieReviewsEditorPane.setHighlighter(null);
         movieReviewsEditorPane.setMaximumSize(new java.awt.Dimension(1000, 1000));
         movieReviewsEditorPane.setMinimumSize(new java.awt.Dimension(130, 400));
         jScrollPane3.setViewportView(movieReviewsEditorPane);
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton1.setText("Write review");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goToWriteReviewCardButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        goToWriteReviewCardButton.setText("Write review");
+        goToWriteReviewCardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goToWriteReviewCardButtonActionPerformed(evt);
             }
         });
 
@@ -259,13 +178,13 @@ class MovieListData extends AbstractListModel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addComponent(goToWriteReviewCardButton))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(movieTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
                                 .addComponent(jButton3)))))
                 .addContainerGap())
         );
@@ -283,7 +202,7 @@ class MovieListData extends AbstractListModel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(goToWriteReviewCardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -307,11 +226,10 @@ class MovieListData extends AbstractListModel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private void goToWriteReviewCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToWriteReviewCardButtonActionPerformed
+        this.parentFrame.showCard("writeReviewCard");
+    }//GEN-LAST:event_goToWriteReviewCardButtonActionPerformed
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         this.parentFrame.showCard("homePageCard");
     }//GEN-LAST:event_goBackButtonActionPerformed
@@ -326,28 +244,128 @@ class MovieListData extends AbstractListModel {
             repaintMovieList();
         }
     }//GEN-LAST:event_selectDateComboBoxItemStateChanged
-
+    
+    public void updateView() {
+        reloadMovieList();
+        // adjust GUI and load data into it
+        selectDateComboBox.setSelectedIndex(0);
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        movieListData.resetMovieListData();
+        Base.close();
+        repaintMovieList();
+        if (this.app.isCurrentUserAuthorized()) {
+            this.goToWriteReviewCardButton.setVisible(true);
+        } else {
+            this.goToWriteReviewCardButton.setVisible(false);
+        }
+    }
+    private void reloadMovieList() {
+        // load necessary movies
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        MovieController controller = new MovieController();
+        this.lastWeekMovies = controller.showLastWeekMovies();
+        this.thisAndNextWeekMovies = controller.showThisAndNextWeekMovies();
+        Base.close();
+    }
     private void repaintMovieList() {
         movieListPane.setSelectedIndex(0);
         movieListPane.repaint();
+        // !!!!!! WILL BE CALLED TWICE WHEN UPDATING VIEW
         paintCurrentlySelectedMovie();
     }
+    class MovieListData extends AbstractListModel {
+        String[] strings;
+        String[] thisAndNextWeekMovieNames;
+        String[] lastWeekMovieNames;
+        String   noMoviesAvailableMsg = "<html>No movies available<br>during selected time<br>period. Select a<br>different period<br>in the box above</html>";
+
+        public MovieListData() {
+            loadMovieNames();
+            // load this and next week movie names into jList
+            strings = thisAndNextWeekMovieNames;
+        }
+        void loadMovieNames() {
+            // create array of movie names
+            if (thisAndNextWeekMovies.isEmpty()) {
+                thisAndNextWeekMovieNames = new String[1];
+                thisAndNextWeekMovieNames[0] = noMoviesAvailableMsg;
+            } else {
+                thisAndNextWeekMovieNames = new String[thisAndNextWeekMovies.size()];
+                for (int i = 0; i < thisAndNextWeekMovies.size(); i++)
+                    thisAndNextWeekMovieNames[i] = thisAndNextWeekMovies.get(i).getString("title");
+            }
+            if (lastWeekMovies.isEmpty()) {
+                lastWeekMovieNames = new String[1];
+                lastWeekMovieNames[0] = noMoviesAvailableMsg;
+            } else {
+                lastWeekMovieNames = new String[lastWeekMovies.size()];
+                for (int i = 0; i < lastWeekMovies.size(); i++)
+                    lastWeekMovieNames[i] = lastWeekMovies.get(i).getString("title");
+            }
+        }
+        void resetMovieListData(){
+            loadMovieNames();
+            // load this and next week movie names into jList
+            strings = thisAndNextWeekMovieNames;
+        }
+        public int getSize() {
+            return strings.length;
+        }
+        public Object getElementAt(int index) {
+            return strings[index];
+        }
+        public void updateWithLastWeekMovies() {
+            strings = lastWeekMovieNames;
+        }
+        public void updateWithThisAndNextWeekMovies() {
+            strings = thisAndNextWeekMovieNames;
+        }
+    }
+    public void paintCurrentlySelectedMovie() {
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Movie movie = getCurrentlySelectedMovie();
+        movieTitle.setText(movie.getString("title"));
+        movieSynopsis.setText(movie.getString("synopsis"));
+        MovieReviewController controller = new MovieReviewController();
+        List<MovieReview> movieReviewList = controller.getReviewsByMovieId(movie.getInteger("id"));
+        String movieReviewsString = "";
+        if (movieReviewList.isEmpty()) {
+            movieReviewsString = "<html><body>No reviews have been written for this movie yet. If you watched this movie, you can leave a review by clicking 'Write Review' button above.</body></html>";
+        } else {
+            movieReviewsString += "<html><head></head><body>";
+            for (MovieReview movieReview : movieReviewList) {
+                movieReviewsString += String.format("<div style=\"margin: 5px 10px 30px 10px;\"><h2 class=\"header\">%s</h2><p>%s</p></div><hr>",
+                                                    Customer.findFirst("id =?", movieReview.getString("customer_id")).getString("username"),
+                                                    movieReview.getString("content"));
+            }
+            movieReviewsString += "</body></html>";
+        }
+        this.movieReviewsEditorPane.setText(movieReviewsString);
+         
+        Base.close();
+    }
     
+    Movie getCurrentlySelectedMovie() {
+        return getCurrentMovieList().get(movieListPane.getSelectedIndex());
+    }
+    private List<Movie> getCurrentMovieList() {
+        if (currentWeekMoviesSelected())
+            return thisAndNextWeekMovies;
+        return lastWeekMovies;
+    }
     private boolean currentWeekMoviesSelected() {
         return this.selectDateComboBox.getSelectedIndex() == 0;
     }
     private boolean lastWeekMoviesSelected() {
         return this.selectDateComboBox.getSelectedIndex() == 1;    
     }
-    private void paintCurrentlySelectedMovie(){
-        paintMovie(movieListPane.getSelectedIndex());
-    }
     
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton goBackButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton goToWriteReviewCardButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

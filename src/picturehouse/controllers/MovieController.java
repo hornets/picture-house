@@ -35,8 +35,7 @@ public class MovieController {
         return Movie.findFirst("id = ?", id);
     }
     public List<Movie> showMoviesAfter(Date premieredAfter){
-        List<Movie> movies = Movie.where("start_date > ?", premieredAfter);
-        return movies;
+        return Movie.where("start_date > ?", premieredAfter);
     }
 
 

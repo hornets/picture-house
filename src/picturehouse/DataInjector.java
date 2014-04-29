@@ -13,6 +13,7 @@ import java.util.Calendar;
 import org.javalite.activejdbc.Base;
 import picturehouse.controllers.MovieController;
 import picturehouse.controllers.MovieReviewController;
+import picturehouse.models.Seat;
 
 /**
  *
@@ -44,10 +45,20 @@ public class DataInjector {
 //        controller.create("Pulp fiction", "http://www.youtube.com", "good one", Date.valueOf(lastMonthDate));
 //        Base.close();
 
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
-        MovieReviewController controller = new MovieReviewController();
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        MovieReviewController controller = new MovieReviewController();
 //        controller.create(1, 1, "very nice movie");
-        controller.create(1, 3, "very nice movie");
-        Base.close();
+//        controller.create(1, 3, "very nice movie");
+//        Base.close();
+        
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        String[] letters = {"A", "B", "C", "D", "E", "F", "G"};
+//        for (String letter : letters) {
+//            for (int j = 1; j < 11; j++) {
+//                new Seat().set("seat_number", j).set("row_letter", letter).save();
+//            }
+//            
+//        }
+//        Base.close();
     }
 }

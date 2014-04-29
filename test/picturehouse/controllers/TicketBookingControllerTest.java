@@ -44,12 +44,12 @@ public class TicketBookingControllerTest {
 
         // create a seat in the room
         int seat_number = 1;
-        int row_number = 1;
-        Seat seat = Seat.createIt("seat_number", seat_number, "row_number", row_number);
+        String row_letter = "A";
+        Seat seat = Seat.createIt("seat_number", seat_number, "row_letter", row_letter);
         int seat_id =  seat.getInteger("id");
 
         // ensure the seat is available for booking
-        assertFalse(screening.isSeatBooked(seat_number, row_number));
+        assertFalse(screening.isSeatBooked(seat_number, row_letter));
 
         // create a new TicketBooking and book the seat
         TicketBookingController controller = new TicketBookingController();
@@ -60,7 +60,7 @@ public class TicketBookingControllerTest {
         the(ticketBookings.size()).shouldBeEqual(1);
         
         // ensure the seat has indeed been booked
-        assertTrue(screening.isSeatBooked(seat_number, row_number));
+        assertTrue(screening.isSeatBooked(seat_number, row_letter));
 
     }
     @Test
@@ -71,9 +71,9 @@ public class TicketBookingControllerTest {
         int screening_id = 1;
 
         // create several seats in the room
-        Seat seat1 = Seat.createIt("seat_number", 1, "row_number", 1);
-        Seat seat2 = Seat.createIt("seat_number", 2, "row_number", 1);
-        Seat seat3 = Seat.createIt("seat_number", 3, "row_number", 1);
+        Seat seat1 = Seat.createIt("seat_number", 1, "row_letter", "A");
+        Seat seat2 = Seat.createIt("seat_number", 2, "row_letter", "A");
+        Seat seat3 = Seat.createIt("seat_number", 3, "row_letter", "A");
         // get seats' ids
         int seat_id1 =  Integer.parseInt(Seat.findFirst("seat_number = ?", 1).getString("id"));
         int seat_id2 =  Integer.parseInt(Seat.findFirst("seat_number = ?", 2).getString("id"));

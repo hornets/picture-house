@@ -9,6 +9,7 @@ package picturehouse.views;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import picturehouse.PictureHouse;
+import picturehouse.models.Movie;
 
 /**
  *
@@ -44,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         signInPanel1 = new picturehouse.views.SignInPanel(app, this);
         newsletterPanel1 = new picturehouse.views.NewsletterPanel(this);
         browseMoviesPanel1 = new picturehouse.views.BrowseMoviesPanel(app, this);
+        writeReviewPanel1 = new picturehouse.views.WriteReviewPanel(app, this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -55,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(signInPanel1, "signInCard");
         mainPanel.add(newsletterPanel1, "newsletterCard");
         mainPanel.add(browseMoviesPanel1, "browseMoviesCard");
+        mainPanel.add(writeReviewPanel1, "writeReviewCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,17 +127,34 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private picturehouse.views.NewsletterPanel newsletterPanel1;
     private picturehouse.views.SignInPanel signInPanel1;
+    private picturehouse.views.WriteReviewPanel writeReviewPanel1;
     // End of variables declaration//GEN-END:variables
 
     
     public void showCard(String cardName) {
+        updateCard(cardName);
         CardLayout card = (CardLayout)this.mainPanel.getLayout();
         card.show(this.mainPanel, cardName);
     }
        
     void updateCard(String cardName) {
         // implement a better version if more cards need view updates
-        if (cardName == "homePageCard")
+        if (cardName == "homePageCard") {
             this.homePagePanel1.updateView();
+            return;
+        }
+        if (cardName == "browseMoviesCard") {
+            this.browseMoviesPanel1.updateView();
+            return;
+        }
+        if (cardName == "writeReviewCard") {
+            this.writeReviewPanel1.updateView();
+            return;
+        }
+            
+    }
+
+    public Movie getCurrentlySelectedMovie() {
+        return this.browseMoviesPanel1.getCurrentlySelectedMovie();
     }
 }

@@ -36,15 +36,15 @@ public class ScreeningTest {
 
         // create a new seat
         int seat_number = 1;
-        int row_number = 1;
-        Seat seat = Seat.createIt("seat_number", seat_number, "row_number", row_number);
+        String row_letter = "A";
+        Seat seat = Seat.createIt("seat_number", seat_number, "row_letter", row_letter);
 
         // ensure the seat is available for booking
-        assertFalse(screening.isSeatBooked(seat_number, row_number));
+        assertFalse(screening.isSeatBooked(seat_number, row_letter));
         // create a new TicketBooking and book the seat
         controller.create(1, screening.getInteger("id"), seat.getInteger("id"), true);
         // ensure the seat has indeed been booked
-        assertTrue(screening.isSeatBooked(seat_number, row_number));
+        assertTrue(screening.isSeatBooked(seat_number, row_letter));
     }
     
 }

@@ -13,8 +13,8 @@ public class Screening extends Model {
         validatePresenceOf("start_date").message("Please enter the screening date for this movie");
     }
 
-    public boolean isSeatBooked(int seat_number, int row_number){
-        Seat seat = Seat.findFirst("seat_number = ? AND row_number = ?", seat_number, row_number);
+    public boolean isSeatBooked(int seat_number, String row_letter){
+        Seat seat = Seat.findFirst("seat_number = ? AND row_letter = ?", seat_number, row_letter);
         int seat_id =  Integer.parseInt(seat.getString("id"));
         TicketBooking booking = TicketBooking.findFirst("seat_id = ? AND screening_id = ?", seat_id, getString("id"));
         

@@ -11,7 +11,7 @@ import org.javalite.activejdbc.Base;
 public class PictureHouse {
 
     private boolean isAuthorized;
-        
+    private Customer currentCustomer = null;
     public PictureHouse() {
         this.isAuthorized = false;
     }
@@ -22,8 +22,12 @@ public class PictureHouse {
         
         
     }
-    
-    
+    public void setCurrentCustomer(Customer customer) {
+        this.currentCustomer = customer;
+    }
+    public Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
     public boolean isCurrentUserAuthorized() {
         return this.isAuthorized;
     }

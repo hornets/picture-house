@@ -13,6 +13,7 @@ import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.validation.ValidationException;
 import picturehouse.PictureHouse;
 import picturehouse.controllers.CustomerController;
+import picturehouse.models.Customer;
 
 /**
  *
@@ -162,7 +163,7 @@ public class CreateAccountPanel extends javax.swing.JPanel {
             creditCardField.setText("");
             //       save authentication
             app.authorizeCurrentUser();
-            this.parentFrame.updateCard("homePageCard");
+            this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
             this.parentFrame.showCard("homePageCard");
         } catch (ValidationException e) {
             Map<String, String> errors = e.errors();
