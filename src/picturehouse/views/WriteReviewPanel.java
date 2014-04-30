@@ -121,7 +121,7 @@ public class WriteReviewPanel extends javax.swing.JPanel {
         if (movieReviewTextArea.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "A movie review cannot be blank! Please write something.", "Input Errors", JOptionPane.WARNING_MESSAGE);
         } else {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             MovieReviewController controller = new MovieReviewController();
             controller.create(
                     this.app.getCurrentCustomer().getInteger("id"),

@@ -44,7 +44,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         this.app = app;
         this.parentFrame = parentFrame;
         reloadMovieList();
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         movieListData = new MovieListData();
         movieListPane.setModel(movieListData);
         Base.close();
@@ -255,7 +255,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                 // disable bookNowButton if there are no more screenings for this movie
                 selectScreeningButton.setEnabled(false);
             }
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             // disable 'Write Review' button if current movie list is empty
             if (getCurrentMovieList().isEmpty()) {
                 goToWriteReviewCardButton.setEnabled(false);
@@ -280,14 +280,14 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         reloadMovieList();
         // adjust GUI and load data into it
         selectDateComboBox.setSelectedIndex(0);
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         movieListData.resetMovieListData();
         Base.close();
         repaintMovieList();
     }
     private void reloadMovieList() {
         // load necessary movies
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         MovieController controller = new MovieController();
         this.lastWeekMovies = controller.showLastWeekMovies();
         this.thisAndNextWeekMovies = controller.showThisAndNextWeekMovies();
@@ -349,7 +349,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         }
     }
     public void paintCurrentlySelectedMovie() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         String title;
         String synopsis;
         Movie movie;

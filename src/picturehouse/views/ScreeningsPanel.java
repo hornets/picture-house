@@ -724,7 +724,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void bookNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookNowButtonActionPerformed
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         TicketBookingController controller = new TicketBookingController();
         int customer_id = app.getCurrentCustomer().getInteger("id");
         int screening_id = getCurrentlySelectedScreening().getInteger("id");
@@ -774,7 +774,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
             strings = screeningTimesArray;
         }
         void loadScreeningsList() {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             Movie selectedMovie = app.getSelectedMovie();
             if (selectedMovie == null) {
                 // load error message into list if no movies have been selected
@@ -829,7 +829,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         resetTicketCostPanel();
         if (screeningsListData.hasScreeningsForThisMovie()) {
             updateTicketCostPanel();
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             List<Seat> seatsList = Seat.findAll();
             Screening currentScreening = getCurrentlySelectedScreening();
 
@@ -863,7 +863,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         }
     }
     void paintSeatButtons() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         List<Seat> seatsList = Seat.findAll();
         JToggleButton button;
         for (int i=0; i < this.seatButtonsArray.length; i++) {
@@ -912,7 +912,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     }
     
     void updateTicketCostPanel() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         Double currentTicketPrice = getCurrentlySelectedScreening().getDouble("price");
         Base.close();
         this.ticketPriceLabel.setText("£"+Double.toString(currentTicketPrice));

@@ -42,7 +42,7 @@ public class DataInjector {
 //        String nextFridayDate = df.format(c.getTime());
 //        c.add(Calendar.DATE, -35);
 //        String lastMonthDate = df.format(c.getTime());
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        MovieController controller = new MovieController();
 //        controller.create("Inception", "http://www.youtube.com", "good one", Date.valueOf(lastWednesdayDate));
 //        controller.create("Flintstones", "http://www.youtube.com", "good one", Date.valueOf(thisTuesdayDate));
@@ -50,13 +50,13 @@ public class DataInjector {
 //        controller.create("Pulp fiction", "http://www.youtube.com", "good one", Date.valueOf(lastMonthDate));
 //        Base.close();
 
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        MovieReviewController controller = new MovieReviewController();
 //        controller.create(1, 1, "very nice movie");
 //        controller.create(1, 3, "very nice movie");
 //        Base.close();
         
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        String[] letters = {"A", "B", "C", "D", "E", "F", "G"};
 //        for (String letter : letters) {
 //            for (int j = 1; j < 11; j++) {

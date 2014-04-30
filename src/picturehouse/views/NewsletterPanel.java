@@ -29,7 +29,7 @@ public class NewsletterPanel extends javax.swing.JPanel {
         initComponents();
         this.parentFrame = parentFrame;
         
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         // retrieve latest newsletter data
         NewsletterController controller = new NewsletterController();
         Newsletter newsletter = controller.loadLatestNewsletter();

@@ -147,7 +147,7 @@ public class SignInPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Password or Customer name fields cannot be blank", "Input Errors", JOptionPane.WARNING_MESSAGE);
         } else {
             CustomerController controller = new CustomerController();
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             if (controller.verifyCredentials(customerNameField.getText(), passwordField.getText())) {
                 this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
                 this.parentFrame.showCard("homePageCard");

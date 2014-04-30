@@ -57,7 +57,7 @@ public class PrintTicketsPanel extends javax.swing.JPanel {
             strings = new String[0];
         }
         void loadTicketsList() {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
             // load tickets for current user
             TicketBookingController controller = new TicketBookingController();
             ticketsList = controller.returnUnprintedTickets(app.getCurrentCustomer().getInteger("id"));
@@ -180,7 +180,7 @@ public class PrintTicketsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void printTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTicketButtonActionPerformed
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         getCurrentlySelectedTicketBooking().print();
         Base.close();
         updateView();

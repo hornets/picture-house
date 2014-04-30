@@ -46,7 +46,7 @@
 //
 //        //movies
 //
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        
 //        MovieController controller = new MovieController();
 //        //1
@@ -64,7 +64,7 @@
 //
 //        //customers
 //        
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        //1
 //       	CustomerController controller = new CustomerController();
 //       	controller.create("vlad", "1111222233335555" , "Pa$$w0rd");
@@ -76,7 +76,7 @@
 //
 //        //reviews
 //        
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        //1
 //       	MovieReviewController controller = new MovieReviewController();
 //       	controller.create(1, 1 , "Funny and Comedic At The Same Time");
@@ -104,7 +104,7 @@
 //
 //       	//screenings
 //
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        
 //        ScreeningController controller = new ScreeningController();
 //        //1
@@ -122,7 +122,7 @@
 //        
 //
 //        //seats
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        String[] letters = {"A", "B", "C", "D", "E", "F", "G"};
 //        for (String letter : letters) {
 //            for (int j = 1; j < 11; j++) {
@@ -137,7 +137,7 @@
 //
 //        //screenings
 //
-//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+//        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
 //        
 //        TicketBookingController controller = new TicketBookingController();
 //        //1

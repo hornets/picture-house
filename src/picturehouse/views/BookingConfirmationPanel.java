@@ -116,7 +116,7 @@ public class BookingConfirmationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_goToMainScreenButtonActionPerformed
 
     private void printTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTicketButtonActionPerformed
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
         // print out newly booked tickets
         for (TicketBooking ticketBooking : this.app.getCurrentTicketBookings()) {
             ticketBooking.print();
