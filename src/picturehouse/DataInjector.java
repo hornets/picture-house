@@ -15,6 +15,7 @@ import org.javalite.activejdbc.Base;
 import picturehouse.controllers.MovieController;
 import picturehouse.controllers.MovieReviewController;
 import picturehouse.controllers.ScreeningController;
+import picturehouse.controllers.TicketBookingController;
 import picturehouse.models.Screening;
 import picturehouse.models.Seat;
 import picturehouse.models.TicketBooking;
@@ -68,17 +69,20 @@ public class DataInjector {
 //                       .set("price", 12.13)
 //                       .set("start_date", Timestamp.valueOf("2014-05-01 14:00:00"))
 //                       .save();
-//        
+//        TicketBookingController controller = new TicketBookingController();
+//        controller.create(1, 5, 4, false);
 //                new TicketBooking().set("customer_id", 1)
 //                           .set("screening_id", 5)
 //                           .set("seat_id", 4)
-//                           .set("is_printed", true)
+//                           .set("is_printed", false)
 //                           .save();
-//                new TicketBooking().set("customer_id", 1)
+//                new TicketBooking().set("customer_id", 3)
 //                           .set("screening_id", 5)
 //                           .set("seat_id", 23)
-//                           .set("is_printed", true)
+//                           .set("is_printed", false)
 //                           .save();
+//        TicketBooking tb = TicketBooking.findFirst("id = ?", 20);
+//        tb.print();
         
 //
         Base.close();

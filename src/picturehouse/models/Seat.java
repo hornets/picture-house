@@ -1,5 +1,6 @@
 package picturehouse.models;
 
+import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.Model;
 
 /**
@@ -10,5 +11,11 @@ public class Seat extends Model{
     static {
         validatePresenceOf("seat_number").message("A valid seat number is required");
         validatePresenceOf("row_letter").message("A valid row letter is required");
-    }    
+    }
+    
+    public static Seat getSeatByString(String seatString){
+        String row_letter = seatString.split("[0-9]+")[0];
+        int seat_number = Integer.parseInt(seatString.split("[A-Z]+")[1]);
+        return Seat.findFirst("seat_number = ? AND row_letter = ?", seat_number, row_letter);
+    }
 }

@@ -47,6 +47,8 @@ public class MainFrame extends javax.swing.JFrame {
         browseMoviesPanel1 = new picturehouse.views.BrowseMoviesPanel(app, this);
         writeReviewPanel1 = new picturehouse.views.WriteReviewPanel(app, this);
         screeningsPanel1 = new picturehouse.views.ScreeningsPanel(app, this);
+        bookingConfirmationPanel1 = new picturehouse.views.BookingConfirmationPanel(app, this);
+        printTicketsPanel1 = new picturehouse.views.PrintTicketsPanel(app, this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 900));
@@ -62,6 +64,8 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(browseMoviesPanel1, "browseMoviesCard");
         mainPanel.add(writeReviewPanel1, "writeReviewCard");
         mainPanel.add(screeningsPanel1, "screeningsCard");
+        mainPanel.add(bookingConfirmationPanel1, "bookingConfirmationCard");
+        mainPanel.add(printTicketsPanel1, "printTicketsCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,11 +129,13 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private picturehouse.views.BookingConfirmationPanel bookingConfirmationPanel1;
     private picturehouse.views.BrowseMoviesPanel browseMoviesPanel1;
     private picturehouse.views.CreateAccountPanel createAccountPanel1;
     private picturehouse.views.HomePagePanel homePagePanel1;
     private javax.swing.JPanel mainPanel;
     private picturehouse.views.NewsletterPanel newsletterPanel1;
+    private picturehouse.views.PrintTicketsPanel printTicketsPanel1;
     private picturehouse.views.ScreeningsPanel screeningsPanel1;
     private picturehouse.views.SignInPanel signInPanel1;
     private picturehouse.views.WriteReviewPanel writeReviewPanel1;
@@ -160,10 +166,17 @@ public class MainFrame extends javax.swing.JFrame {
             this.screeningsPanel1.updateView();
             return;
         }
+        if (cardName == "printTicketsCard") {
+            this.printTicketsPanel1.updateView();
+            return;
+        }
             
     }
 
     public Movie getCurrentlySelectedMovie() {
         return this.browseMoviesPanel1.getCurrentlySelectedMovie();
+    }
+    public void notifyThatTicketsHaveBeenPrinted() {
+//        this.browseMoviesPanel1.
     }
 }

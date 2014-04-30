@@ -68,6 +68,11 @@ public class HomePagePanel extends javax.swing.JPanel {
 
         printTicketButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         printTicketButton.setText("Print Tickets");
+        printTicketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printTicketButtonActionPerformed(evt);
+            }
+        });
 
         authorizationButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         authorizationButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +140,7 @@ public class HomePagePanel extends javax.swing.JPanel {
 
     private void authorizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authorizationButtonActionPerformed
         if (this.app.isCurrentUserAuthorized()) {
-            this.app.deauthorizeCurrentUser();
+            this.app.flushCurrentUserData();
             this.updateView();
             JOptionPane.showMessageDialog(this, "You have successfully logged out!");
         } else {
@@ -150,6 +155,14 @@ public class HomePagePanel extends javax.swing.JPanel {
     private void browseMoviesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseMoviesButtonActionPerformed
         this.parentFrame.showCard("browseMoviesCard");
     }//GEN-LAST:event_browseMoviesButtonActionPerformed
+
+    private void printTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTicketButtonActionPerformed
+        if (this.app.isCurrentUserAuthorized()) {
+            this.parentFrame.showCard("printTicketsCard");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please log in before proceeding.");
+        }
+    }//GEN-LAST:event_printTicketButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,5 +183,9 @@ public class HomePagePanel extends javax.swing.JPanel {
             this.authorizationButton.setText("Log In");
         }
     }
+    
+//    public void notifyThatTicketsHaveBeenPrinted() {
+//        
+//    }
 
 }

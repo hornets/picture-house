@@ -149,7 +149,6 @@ public class SignInPanel extends javax.swing.JPanel {
             CustomerController controller = new CustomerController();
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
             if (controller.verifyCredentials(customerNameField.getText(), passwordField.getText())) {
-                this.app.authorizeCurrentUser();
                 this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
                 this.parentFrame.showCard("homePageCard");
                 // clear text field view

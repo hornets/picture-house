@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import org.javalite.activejdbc.Base;
 import picturehouse.PictureHouse;
 import picturehouse.controllers.ScreeningController;
+import picturehouse.controllers.TicketBookingController;
 import picturehouse.models.Movie;
 import picturehouse.models.Screening;
 import picturehouse.models.Seat;
@@ -159,7 +160,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jToggleButton68 = new javax.swing.JToggleButton();
         jToggleButton69 = new javax.swing.JToggleButton();
         jToggleButton70 = new javax.swing.JToggleButton();
-        jButton2 = new javax.swing.JButton();
+        bookNowButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Choose a screening:");
@@ -664,8 +665,13 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton2.setText("Book Now");
+        bookNowButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        bookNowButton.setText("Book Now");
+        bookNowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookNowButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -681,7 +687,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                     .addComponent(seatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(bookNowButton)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -694,7 +700,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(seatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bookNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -717,6 +723,22 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         this.parentFrame.showCard("browseMoviesCard");
     }//GEN-LAST:event_goBackButtonActionPerformed
+
+    private void bookNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookNowButtonActionPerformed
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        TicketBookingController controller = new TicketBookingController();
+        int customer_id = app.getCurrentCustomer().getInteger("id");
+        int screening_id = getCurrentlySelectedScreening().getInteger("id");
+        int seat_id;
+        List<TicketBooking> ticketBookingsList = new ArrayList<TicketBooking>();
+        for (String seatString : seatBookings) {
+            seat_id = Seat.getSeatByString(seatString).getInteger("id");
+            ticketBookingsList.add(controller.create(customer_id, screening_id, seat_id, false));
+        }
+        Base.close();
+        this.app.setCurrentTicketBookings(ticketBookingsList);
+        this.parentFrame.showCard("bookingConfirmationCard");
+    }//GEN-LAST:event_bookNowButtonActionPerformed
 
     
     void updateView() {
@@ -767,11 +789,13 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                 if (screeningsList.isEmpty()) {
                     screeningTimesArray = new String[1];
                     screeningTimesArray[0] = noScreeningsAvailableMsg;
+                    bookNowButton.setEnabled(false);
                 } else {
                     screeningTimesArray = new String[screeningsList.size()];
                     for (int i = 0; i < screeningsList.size(); i++) {
                         screeningTimesArray[i] = new SimpleDateFormat("EEE dd MMM HH:mm").format(screeningsList.get(i).getTimestamp("start_date"));
                     }
+                    bookNowButton.setEnabled(true);
                 }
             }
             Base.close();
@@ -804,8 +828,8 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         // instantiate/reset array to keep track of pressed seatButtons
         seatBookings = new ArrayList<>();
         resetTicketCostPanel();
-        updateTicketCostPanel();
         if (screeningsListData.hasScreeningsForThisMovie()) {
+            updateTicketCostPanel();
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
             List<Seat> seatsList = Seat.findAll();
             Screening currentScreening = getCurrentlySelectedScreening();
@@ -813,6 +837,7 @@ public class ScreeningsPanel extends javax.swing.JPanel {
 
             Component[] seatButtonsArray = seatPanel.getComponents();
             JToggleButton button;
+            int numberOfSeatsBooked = 0;
             // watch out for NullPointerException || OutOfBoundArray.. at boottime when no screening is selected yet
             for (int i=0; i < seatButtonsArray.length; i++) {
                 button = (JToggleButton) seatButtonsArray[i];
@@ -821,9 +846,16 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                 // if this seat is booked, disable the button
                 if (currentScreening.isSeatBooked(seatsList.get(i).getInteger("id"))) {
                     button.setEnabled(false);
+                    numberOfSeatsBooked++;
                 } else {
                     button.setEnabled(true);
                 }
+            }
+            // if all seats have been booked for this screening, disable bookNowButton
+            if (numberOfSeatsBooked == seatsList.size()) {
+                bookNowButton.setEnabled(false);
+            } else {
+                bookNowButton.setEnabled(true);
             }
             Base.close();
         } else {
@@ -873,8 +905,6 @@ public class ScreeningsPanel extends javax.swing.JPanel {
             updateTicketCostPanel();
     }   
     private List<String> seatBookings;
-    // set priceLabelOnLoad
-    // reset jLabels
     
     void resetTicketCostPanel(){
         this.ticketPriceLabel.setText("£0");
@@ -892,8 +922,8 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bookNowButton;
     private javax.swing.JButton goBackButton;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

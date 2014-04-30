@@ -161,8 +161,6 @@ public class CreateAccountPanel extends javax.swing.JPanel {
             customerNameField.setText("");
             passwordField.setText("");
             creditCardField.setText("");
-            //       save authentication
-            app.authorizeCurrentUser();
             this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
             this.parentFrame.showCard("homePageCard");
         } catch (ValidationException e) {

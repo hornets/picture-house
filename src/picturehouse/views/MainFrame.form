@@ -133,6 +133,26 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="picturehouse.views.BookingConfirmationPanel" name="bookingConfirmationPanel1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new picturehouse.views.BookingConfirmationPanel(app, this)"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="bookingConfirmationCard"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="picturehouse.views.PrintTicketsPanel" name="printTicketsPanel1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new picturehouse.views.PrintTicketsPanel(app, this)"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="printTicketsCard"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
