@@ -88,6 +88,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(700, 547));
 
         movieListPane.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        movieListPane.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(movieListPane);
 
         goBackButton.setText("< Return to Main Screen");
@@ -123,7 +124,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(selectDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

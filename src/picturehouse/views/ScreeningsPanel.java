@@ -77,13 +77,13 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         screeningsJList = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
+        ticketCostPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        ticketPriceLabel = new javax.swing.JLabel();
+        numberOfTicketsSelectedLabel = new javax.swing.JLabel();
+        totalCostLabel = new javax.swing.JLabel();
         goBackButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -168,9 +168,10 @@ public class ScreeningsPanel extends javax.swing.JPanel {
 
         screeningsJList.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         screeningsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        screeningsJList.setToolTipText("");
         jScrollPane1.setViewportView(screeningsJList);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ticketCostPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel2.setText("Tickets price:");
@@ -181,51 +182,51 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel4.setText("Total cost:");
 
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel5.setText("jLabel5");
+        ticketPriceLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        ticketPriceLabel.setText("£0");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel6.setText("jLabel6");
+        numberOfTicketsSelectedLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        numberOfTicketsSelectedLabel.setText("0");
 
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel7.setText("jLabel7");
+        totalCostLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        totalCostLabel.setText("£0");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout ticketCostPanelLayout = new javax.swing.GroupLayout(ticketCostPanel);
+        ticketCostPanel.setLayout(ticketCostPanelLayout);
+        ticketCostPanelLayout.setHorizontalGroup(
+            ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ticketCostPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ticketCostPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ticketPriceLabel))
+                    .addGroup(ticketCostPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(totalCostLabel))
+                    .addGroup(ticketCostPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jLabel6)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(numberOfTicketsSelectedLabel)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        ticketCostPanelLayout.setVerticalGroup(
+            ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ticketCostPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(ticketPriceLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                    .addComponent(numberOfTicketsSelectedLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ticketCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel7)))
+                    .addComponent(totalCostLabel)))
         );
 
         goBackButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -245,19 +246,21 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(goBackButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ticketCostPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ticketCostPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -717,22 +720,28 @@ public class ScreeningsPanel extends javax.swing.JPanel {
 
     
     void updateView() {
+//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
         reloadScreeningsJList();
+        //System.out.println("\n\n\nCurent Movie:"+ this.app.getSelectedMovie().getString("title") +"\n\n\n");
         updateSeatButtons();
+//            }
+//        });
     }
     void reloadScreeningsJList() {
         // reload data from DB into screeningsListData
         screeningsListData.resetScreeningsListData();
         // repaint screeningsJList with fresh data
-        
-        screeningsJList.repaint();
         screeningsJList.setSelectedIndex(0);
+        screeningsJList.updateUI();
+        //screeningsJList.repaint();
+        //screeningsJList.revalidate();
     }
     
     
     
     class ScreeningsListData extends AbstractListModel {
-        String[] strings;
+        public String[] strings;
         String[] screeningTimesArray;
         List<Screening> screeningsList;
         String   noScreeningsAvailableMsg = "No screenings yet";
@@ -760,8 +769,9 @@ public class ScreeningsPanel extends javax.swing.JPanel {
                     screeningTimesArray[0] = noScreeningsAvailableMsg;
                 } else {
                     screeningTimesArray = new String[screeningsList.size()];
-                    for (int i = 0; i < screeningsList.size(); i++)
+                    for (int i = 0; i < screeningsList.size(); i++) {
                         screeningTimesArray[i] = new SimpleDateFormat("EEE dd MMM HH:mm").format(screeningsList.get(i).getTimestamp("start_date"));
+                    }
                 }
             }
             Base.close();
@@ -791,6 +801,10 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     }
     
     public void updateSeatButtons() {
+        // instantiate/reset array to keep track of pressed seatButtons
+        seatBookings = new ArrayList<>();
+        resetTicketCostPanel();
+        updateTicketCostPanel();
         if (screeningsListData.hasScreeningsForThisMovie()) {
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
             List<Seat> seatsList = Seat.findAll();
@@ -802,9 +816,14 @@ public class ScreeningsPanel extends javax.swing.JPanel {
             // watch out for NullPointerException || OutOfBoundArray.. at boottime when no screening is selected yet
             for (int i=0; i < seatButtonsArray.length; i++) {
                 button = (JToggleButton) seatButtonsArray[i];
+                //deselect any selected buttons
+                button.setSelected(false);
                 // if this seat is booked, disable the button
-                if (currentScreening.isSeatBooked(seatsList.get(i).getInteger("id")))
+                if (currentScreening.isSeatBooked(seatsList.get(i).getInteger("id"))) {
                     button.setEnabled(false);
+                } else {
+                    button.setEnabled(true);
+                }
             }
             Base.close();
         } else {
@@ -819,6 +838,11 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         for (int i=0; i < this.seatButtonsArray.length; i++) {
             button = (JToggleButton) this.seatButtonsArray[i];
             button.setText(seatsList.get(i).getString("row_letter") + seatsList.get(i).getString("seat_number"));
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    seatButtonActionPerformed(evt);
+                }
+            });
         }
         Base.close();
     }
@@ -826,17 +850,46 @@ public class ScreeningsPanel extends javax.swing.JPanel {
         JToggleButton button;
         for (int i=0; i < this.seatButtonsArray.length; i++) {
             button = (JToggleButton) this.seatButtonsArray[i];
+            //deselect any selected buttons
+            button.setSelected(false);
+            // disable all buttons
             button.setEnabled(false);
         }
     }
-    
-    
+        
     Screening getCurrentlySelectedScreening() {
         return screeningsListData.getScreeningAtIndex(screeningsJList.getSelectedIndex());
     }
     
+    private void seatButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+           JToggleButton button = (JToggleButton)evt.getSource();
+            if (button.isSelected()) {
+               seatBookings.add(button.getText());
+//                System.out.println("Arr: " + seatBookings.toString());
+            } else {
+               seatBookings.remove(button.getText());
+//               System.out.println("Arr: " + seatBookings.toString());
+            }
+            updateTicketCostPanel();
+    }   
+    private List<String> seatBookings;
+    // set priceLabelOnLoad
+    // reset jLabels
     
-
+    void resetTicketCostPanel(){
+        this.ticketPriceLabel.setText("£0");
+        this.numberOfTicketsSelectedLabel.setText("0");
+        this.totalCostLabel.setText("£0");
+    }
+    
+    void updateTicketCostPanel() {
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Double currentTicketPrice = getCurrentlySelectedScreening().getDouble("price");
+        Base.close();
+        this.ticketPriceLabel.setText("£"+Double.toString(currentTicketPrice));
+        this.numberOfTicketsSelectedLabel.setText("x"+new Integer(seatBookings.size()).toString());
+        this.totalCostLabel.setText("£"+Double.toString(currentTicketPrice*seatBookings.size()));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton goBackButton;
@@ -845,13 +898,9 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
@@ -924,7 +973,11 @@ public class ScreeningsPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton70;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JToggleButton jToggleButton9;
+    private javax.swing.JLabel numberOfTicketsSelectedLabel;
     private javax.swing.JList screeningsJList;
     private javax.swing.JPanel seatPanel;
+    private javax.swing.JPanel ticketCostPanel;
+    private javax.swing.JLabel ticketPriceLabel;
+    private javax.swing.JLabel totalCostLabel;
     // End of variables declaration//GEN-END:variables
 }

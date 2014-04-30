@@ -66,12 +66,17 @@ public class DataInjector {
 //
 //        new Screening().set("movie_id", 2)
 //                       .set("price", 12.13)
-//                       .set("start_date", Timestamp.valueOf("2014-05-01 12:00:00"))
+//                       .set("start_date", Timestamp.valueOf("2014-05-01 14:00:00"))
 //                       .save();
-        
+//        
 //                new TicketBooking().set("customer_id", 1)
-//                           .set("screening_id", 4)
-//                           .set("seat_id", 2)
+//                           .set("screening_id", 5)
+//                           .set("seat_id", 4)
+//                           .set("is_printed", true)
+//                           .save();
+//                new TicketBooking().set("customer_id", 1)
+//                           .set("screening_id", 5)
+//                           .set("seat_id", 23)
 //                           .set("is_printed", true)
 //                           .save();
         
