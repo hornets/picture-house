@@ -239,8 +239,7 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
             this.parentFrame.showCard("writeReviewCard");
         } else {
             JOptionPane.showMessageDialog(this, "Please log in before proceeding.");
-        }
-        
+        }        
     }//GEN-LAST:event_goToWriteReviewCardButtonActionPerformed
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         this.parentFrame.showCard("homePageCard");
@@ -256,6 +255,14 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
                 // disable bookNowButton if there are no more screenings for this movie
                 selectScreeningButton.setEnabled(false);
             }
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+            // disable 'Write Review' button if current movie list is empty
+            if (getCurrentMovieList().isEmpty()) {
+                goToWriteReviewCardButton.setEnabled(false);
+            } else {
+                goToWriteReviewCardButton.setEnabled(true);
+            }
+            Base.close();
             repaintMovieList();
         }
     }//GEN-LAST:event_selectDateComboBoxItemStateChanged
@@ -296,7 +303,8 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         String[] strings;
         String[] thisAndNextWeekMovieNames;
         String[] lastWeekMovieNames;
-        String   noMoviesAvailableMsg = "<html>No movies available<br>during selected time<br>period. Select a<br>different period<br>in the box above</html>";
+        // shown when there are no movies during selected time period
+        String   noMoviesAvailableMsg = "No movies available";
 
         public MovieListData() {
             loadMovieNames();
@@ -342,26 +350,36 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
     }
     public void paintCurrentlySelectedMovie() {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
-        Movie movie = getCurrentlySelectedMovie();
-        movieTitle.setText(movie.getString("title"));
-        movieSynopsis.setText(movie.getString("synopsis"));
-        MovieReviewController controller = new MovieReviewController();
-        List<MovieReview> movieReviewList = controller.getReviewsByMovieId(movie.getInteger("id"));
+        String title;
+        String synopsis;
+        Movie movie;
         String movieReviewsString = "";
-        if (movieReviewList.isEmpty()) {
-            movieReviewsString = "<html><body>No reviews have been written for this movie yet. If you watched this movie, you can leave a review by clicking 'Write Review' button above.</body></html>";
+        if (getCurrentMovieList().isEmpty()) {
+            title = "";
+            synopsis = "No movies available for selected time period. Try a different time period";
         } else {
-            movieReviewsString += "<html><head></head><body>";
-            for (MovieReview movieReview : movieReviewList) {
-                movieReviewsString += String.format("<div style=\"margin: 5px 10px 30px 10px;\"><h2 class=\"header\">%s</h2><p>%s</p></div><hr>",
-                                                    Customer.findFirst("id =?", movieReview.getString("customer_id")).getString("username"),
-                                                    movieReview.getString("content"));
+            movie = getCurrentlySelectedMovie();
+            title = movie.getString("title");
+            synopsis = movie.getString("synopsis");
+            // load movie reviews
+            MovieReviewController controller = new MovieReviewController();
+            List<MovieReview> movieReviewList = controller.getReviewsByMovieId(movie.getInteger("id"));
+            if (movieReviewList.isEmpty()) {
+                movieReviewsString = "<html><body>No reviews have been written for this movie yet. If you watched this movie, you can leave a review by clicking 'Write Review' button above.</body></html>";
+            } else {
+                movieReviewsString += "<html><head></head><body>";
+                for (MovieReview movieReview : movieReviewList) {
+                    movieReviewsString += String.format("<div style=\"margin: 5px 10px 30px 10px;\"><h2 class=\"header\">%s</h2><p>%s</p></div><hr>",
+                                                        Customer.findFirst("id =?", movieReview.getString("customer_id")).getString("username"),
+                                                        movieReview.getString("content"));
+                }
+                movieReviewsString += "</body></html>";
             }
-            movieReviewsString += "</body></html>";
         }
-        this.movieReviewsEditorPane.setText(movieReviewsString);
-         
         Base.close();
+        this.movieTitle.setText(title);
+        this.movieSynopsis.setText(synopsis);
+        this.movieReviewsEditorPane.setText(movieReviewsString);
     }
     
     Movie getCurrentlySelectedMovie() {

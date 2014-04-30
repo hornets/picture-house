@@ -51,7 +51,7 @@ public class MovieController {
         // Get last Sunday
         c.add(Calendar.DATE, 6);
         String lastSunday = df.format(c.getTime());
-        return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", lastMonday, lastSunday);
+        return Movie.findBySQL("select distinct m.id, m.title FROM movies m INNER JOIN screenings s ON (m.id = s.movie_id) where s.start_date BETWEEN ? AND ?",  lastMonday, lastSunday);
     }
 
     public List<Movie> showThisAndNextWeekMovies() {
@@ -65,6 +65,6 @@ public class MovieController {
         // Get next Sunday date
         c.add(Calendar.DATE, 13);
         String nextSunday = df.format(c.getTime());
-        return Movie.where("start_date BETWEEN ? AND ? ORDER BY start_date ASC", thisMonday, nextSunday);
+        return Movie.findBySQL("select distinct m.id, m.title FROM movies m INNER JOIN screenings s ON (m.id = s.movie_id) where s.start_date BETWEEN ? AND ?",  thisMonday, nextSunday);
     }
 }

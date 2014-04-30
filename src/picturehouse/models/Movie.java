@@ -13,5 +13,4 @@ public class Movie extends Model {
         validatePresenceOf("synopsis").message("Please enter a movie for synopsis");
         validatePresenceOf("start_date").message("Please enter a movie start date");
     }
-    
 }
