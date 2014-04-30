@@ -1,6 +1,5 @@
 package picturehouse.models;
 
-import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.Model;
 
 /**

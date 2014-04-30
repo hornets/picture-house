@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Akshay, sevabaskin
+ * @author sevabaskin, Akshay
  */
 public class MovieController {
     public MovieController(){}
@@ -26,7 +26,7 @@ public class MovieController {
                                      .set("trailer_url", trailer_url)
                                      .set("synopsis", synopsis)
                                      .set("start_date", start_date)
-                                     .saveIt();
+                                     .save();
     }
     public void destroy(int id){
         Movie.findFirst("id = ?", id).delete();
@@ -51,6 +51,7 @@ public class MovieController {
         // Get last Sunday
         c.add(Calendar.DATE, 6);
         String lastSunday = df.format(c.getTime());
+        // select movies that whose last screening happened last week
         return Movie.findBySQL("select distinct m.id, m.title FROM movies m INNER JOIN screenings s ON (m.id = s.movie_id) where s.start_date BETWEEN ? AND ?",  lastMonday, lastSunday);
     }
 
@@ -65,6 +66,7 @@ public class MovieController {
         // Get next Sunday date
         c.add(Calendar.DATE, 13);
         String nextSunday = df.format(c.getTime());
+        // select movies that have screenings this and next week
         return Movie.findBySQL("select distinct m.id, m.title FROM movies m INNER JOIN screenings s ON (m.id = s.movie_id) where s.start_date BETWEEN ? AND ?",  thisMonday, nextSunday);
     }
 }

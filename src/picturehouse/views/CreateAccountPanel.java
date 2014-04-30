@@ -6,7 +6,6 @@
 
 package picturehouse.views;
 
-import java.awt.CardLayout;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import org.javalite.activejdbc.Base;

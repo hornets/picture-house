@@ -2,7 +2,6 @@ package picturehouse.controllers;
 
 import picturehouse.models.TicketBooking;
 import java.util.List;
-import picturehouse.models.Customer;
 
 /**
 *

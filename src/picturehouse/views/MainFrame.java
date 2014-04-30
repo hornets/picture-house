@@ -7,7 +7,6 @@
 package picturehouse.views;
 
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 import picturehouse.PictureHouse;
 import picturehouse.models.Movie;
 

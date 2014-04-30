@@ -4,9 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import picturehouse.models.Seat;
 import picturehouse.models.Screening;
-import picturehouse.models.TicketBooking;
 
 public class ScreeningController {
     

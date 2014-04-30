@@ -13,15 +13,12 @@ import picturehouse.models.TicketBooking;
 // TODO: make as a singleton
 public class PictureHouse {
 
-    private boolean isAuthorized;
     private Customer currentCustomer = null;
     private Movie selectedMovie;
     // latest batch of TicketBookings by logged in Customer
     // used to print out newly booked tickets
     private List<TicketBooking> currentTicketBookings;
-    public PictureHouse() {
-        this.isAuthorized = false;
-    }
+    public PictureHouse() {}
 
     public static void main(String[] args) {}
     
