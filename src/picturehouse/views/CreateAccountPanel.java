@@ -151,27 +151,32 @@ public class CreateAccountPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
-        try {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/picturehouse_development", "testuser", "testuserpassword");
+        try {    
             CustomerController controller = new CustomerController();
             controller.create(customerNameField.getText(), passwordField.getText(), creditCardField.getText());
-            Base.close();
             // clear text field view
             customerNameField.setText("");
             passwordField.setText("");
             creditCardField.setText("");
-            this.app.setCurrentCustomer((Customer) Customer.findFirst("username = ?", customerNameField.getText()));
             this.parentFrame.showCard("homePageCard");
+            // would've logged in new customers automatically after sign up,
+            // but it takes time to pick new records in the database
+            JOptionPane.showMessageDialog(this.parentFrame, "Your account has been successfully created. Please sign in.");
+            // clear text field view
+            this.creditCardField.setText("");
+            this.customerNameField.setText("");
+            this.passwordField.setText("");
+            
         } catch (ValidationException e) {
             Map<String, String> errors = e.errors();
             String errorMsgs = "You've got the following errors:\n";
             for (Map.Entry<String, String> entry : errors.entrySet()) {
                 errorMsgs = errorMsgs + entry.getValue() + "\n";
             }
-
             JOptionPane.showMessageDialog(this, errorMsgs, "Validation Errors", JOptionPane.WARNING_MESSAGE);
-            Base.close();
         }
+        Base.close();
     }//GEN-LAST:event_createAccountButtonActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
