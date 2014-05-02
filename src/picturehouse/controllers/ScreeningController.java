@@ -1,5 +1,6 @@
 package picturehouse.controllers;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +11,7 @@ public class ScreeningController {
     
     public ScreeningController() {
     }
-    public void create(Integer movie_id, Double price, Date start_date){
+    public void create(Integer movie_id, Double price, Timestamp start_date){
         new Screening().set("movie_id", movie_id)
                        .set("price", price)
                        .set("start_date", start_date)

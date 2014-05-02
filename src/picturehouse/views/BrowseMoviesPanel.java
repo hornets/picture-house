@@ -147,6 +147,8 @@ public class BrowseMoviesPanel extends javax.swing.JPanel {
         movieSynopsis.setEditable(false);
         movieSynopsis.setBackground(java.awt.SystemColor.window);
         movieSynopsis.setColumns(20);
+        movieSynopsis.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        movieSynopsis.setLineWrap(true);
         movieSynopsis.setRows(5);
         jScrollPane2.setViewportView(movieSynopsis);
 
