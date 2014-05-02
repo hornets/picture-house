@@ -1,70 +1,101 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Picture-house by sevab</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Picture-house : A system for managing networked self-service cinema machines" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <title>Picture-house</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Picture-house</h1>
-        <p>A system for managing networked self-service cinema machines</p>
-        <p class="view"><a href="https://github.com/sevab/picture-house">View the Project on GitHub <small>sevab/picture-house</small></a></p>
-        <ul>
-          <li><a href="https://github.com/sevab/picture-house/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/sevab/picture-house/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/sevab/picture-house">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/sevab/picture-house">View on GitHub</a>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+          <h1 id="project_title">Picture-house</h1>
+          <h2 id="project_tagline">A system for managing networked self-service cinema machines</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/sevab/picture-house/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/sevab/picture-house/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="cinema-tickets-terminal" class="anchor" href="#cinema-tickets-terminal"><span class="octicon octicon-link"></span></a>Cinema Tickets Terminal</h1>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>This is a coursework project assigned as part of the 2nd year Software Engineering class.
+The idea was to develop a GUI ticketing terminal where customers can browse current movies, leave reviews and obviously buy tickets.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>The app architecture gernally follows an MVC pattern with views, models and controllers separated in dedicated packages. The backend uses <a href="https://github.com/javalite/activejdbc">ActiveJDBC</a> (a Java ORM that follows ActiveRecord pattern) and the frontend GUI was developed using Java's Swing. All of the backend Models and Controllers have been tested in a TDD fashion with JUnit, Java's unit testing framework.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<h4>
+<a name="select-among-the-services-of-terminal" class="anchor" href="#select-among-the-services-of-terminal"><span class="octicon octicon-link"></span></a>Select among the services of terminal</h4>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p><img src="https://github.com/sevab/picture-house/raw/gh-pages/images/home_screen_view.png" alt="Home Screen"></p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<h4>
+<a name="create-an-account" class="anchor" href="#create-an-account"><span class="octicon octicon-link"></span></a>Create an account</h4>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p><img src="https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/%20create_account_view.png" alt="Create Account"></p>
+
+<h4>
+<a name="browse-movies-write-movie-reviews-and-read-reviews-by-other-customers" class="anchor" href="#browse-movies-write-movie-reviews-and-read-reviews-by-other-customers"><span class="octicon octicon-link"></span></a>Browse movies, write movie reviews and read reviews by other customers.</h4>
+
+<p><img src="https://github.com/sevab/picture-house/raw/gh-pages/images/browse_movies_view.png" alt="Browse movies"></p>
+
+<h4>
+<a name="choose-a-screening-time-and-book-your-seats" class="anchor" href="#choose-a-screening-time-and-book-your-seats"><span class="octicon octicon-link"></span></a>Choose a screening time and book your seats</h4>
+
+<p><img src="https://github.com/sevab/picture-house/raw/gh-pages/images/screenings_view.png" alt="Screening view"></p>
+
+<h4>
+<a name="print-your-tickets" class="anchor" href="#print-your-tickets"><span class="octicon octicon-link"></span></a>Print your tickets</h4>
+
+<p><img src="https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/print_ticket_screen.png" alt="Print tickets view"></p>
+
+<h4>
+<a name="read-newsletter" class="anchor" href="#read-newsletter"><span class="octicon octicon-link"></span></a>Read newsletter</h4>
+
+<p><img src="https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/newsletter_view.png" alt="Newsletter view"></p>
+
+<h2>
+<a name="how-to-run-it" class="anchor" href="#how-to-run-it"><span class="octicon octicon-link"></span></a>How to run it</h2>
+
+<p>As requested in specification this application has been developed as a true networked machine with its database stored in the cloud. As such, before running this application, you'll need to be connected to the internet. The data has been already preloaded into that database, so all you have to do is run MainFrame.java. The application will automatically connect to the database and will be ready for interaction with preloaded data.</p>
+
+<p>Unfortunatelly we didn't have time to complete Admin interface so if you wish to load your own data, you can run Java code using controller methods (see examples in DataInjector.java file). E.g. this adds a new Movie to the database:</p>
+
+<div class="highlight highlight-java"><pre><span class="n">Base</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">,</span> <span class="s">"jdbc:mysql://db4free.net:3306/picturehouse"</span><span class="o">,</span> <span class="s">"picturehouse"</span><span class="o">,</span> <span class="s">"$password"</span><span class="o">);</span>
+<span class="n">MovieController</span> <span class="n">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MovieController</span><span class="o">();</span>
+<span class="n">controller</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="s">"Inception"</span><span class="o">,</span> <span class="s">"http://www.youtube.com"</span><span class="o">,</span> <span class="s">"A skilled extractor is offered a chance to regain his old life as payment for a task considered to be impossible."</span><span class="o">,</span> <span class="n">Date</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">lastWednesdayDate</span><span class="o">));</span>
+<span class="n">Base</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</pre></div>
       </section>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/sevab">sevab</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Picture-house maintained by <a href="https://github.com/sevab">sevab</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
