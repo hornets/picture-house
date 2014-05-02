@@ -1,3 +1,15 @@
+Cinema Tickets Terminal
+=====================
+
+This is a coursework project assigned as part of the 2nd year Software Engineering class.
+The idea is to develop a GUI ticketing terminal where customers can browse current movies, leave reviews and obviously buy tickets.
+
+As part of the system, there's also an admin interface for managing movies, registered customers, etc.
+
+## What it looks like
+
+
+## How to run it
 README.txt
 As requested in specification this application has been developed as a true networked machine with its database being in the cloud. As such, to run this application, you need to be connected to the internet. The data has been already preloaded into that database, so all you have to do is run MainFrame.java. The application will automatically connect to the database and will be ready for interaction with preloaded data.
 
