@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Picture-house : A system for managing networked self-service cinema machines" />
+    <meta name="description" content="Picture-house : A GUI ticketing terminal where customers can browse movies, leave reviews and obviously book tickets." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/sevab/picture-house">View on GitHub</a>
 
           <h1 id="project_title">Picture-house</h1>
-          <h2 id="project_tagline">A system for managing networked self-service cinema machines</h2>
+          <h2 id="project_tagline">A GUI ticketing terminal where customers can browse movies, leave reviews and obviously book tickets.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/sevab/picture-house/zipball/master">Download this project as a .zip file</a>
@@ -38,6 +38,8 @@
 The idea was to develop a GUI ticketing terminal where customers can browse current movies, leave reviews and obviously buy tickets.</p>
 
 <p>The app architecture gernally follows an MVC pattern with views, models and controllers separated in dedicated packages. The backend uses <a href="https://github.com/javalite/activejdbc">ActiveJDBC</a> (a Java ORM that follows ActiveRecord pattern) and the frontend GUI was developed using Java's Swing. All of the backend Models and Controllers have been tested in a TDD fashion with JUnit, Java's unit testing framework.</p>
+
+<p>Most of the app was quickly written in a 5-day span, so the code is not the most optimised thing, but is generally clean and straightforward. </p>
 
 <h2>
 <a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
