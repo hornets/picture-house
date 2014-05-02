@@ -2,24 +2,44 @@ Cinema Tickets Terminal
 =====================
 
 This is a coursework project assigned as part of the 2nd year Software Engineering class.
-The idea is to develop a GUI ticketing terminal where customers can browse current movies, leave reviews and obviously buy tickets.
+The idea was to develop a GUI ticketing terminal where customers can browse current movies, leave reviews and obviously buy tickets.
 
-As part of the system, there's also an admin interface for managing movies, registered customers, etc.
+The app architecture gernally follows an MVC pattern with views, models and controllers separated in dedicated packages. The backend uses [ActiveJDBC](https://github.com/javalite/activejdbc) (a Java ORM that follows ActiveRecord pattern) and the frontend GUI was developed using Java's Swing. All of the backend Models and Controllers have been tested in a TDD fashion with JUnit, Java's unit testing framework.
 
-## What it looks like
+## How it works
+####Select among the services of terminal
+
+![Home Screen](https://github.com/sevab/picture-house/raw/gh-pages/images/home_screen_view.png)
+
+####Create an account
+
+![Create Account](https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/%20create_account_view.png)
+
+####Browse movies, write movie reviews and read reviews by other customers.
+
+![Browse movies](https://github.com/sevab/picture-house/raw/gh-pages/images/browse_movies_view.png)
+
+####Choose a screening time and book your seats
+
+![Screening view](https://github.com/sevab/picture-house/raw/gh-pages/images/screenings_view.png)
+
+####Print your tickets
+
+![Print tickets view](https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/print_ticket_screen.png)
+
+####Read newsletter
+
+![Newsletter view](https://raw.githubusercontent.com/sevab/picture-house/gh-pages/images/newsletter_view.png)
 
 
 ## How to run it
-README.txt
-As requested in specification this application has been developed as a true networked machine with its database being in the cloud. As such, to run this application, you need to be connected to the internet. The data has been already preloaded into that database, so all you have to do is run MainFrame.java. The application will automatically connect to the database and will be ready for interaction with preloaded data.
+As requested in specification this application has been developed as a true networked machine with its database stored in the cloud. As such, before running this application, you'll need to be connected to the internet. The data has been already preloaded into that database, so all you have to do is run MainFrame.java. The application will automatically connect to the database and will be ready for interaction with preloaded data.
 
-Unfortunatelly we didn't have time to complete Admin interface so if you wish to load your own data, you can run Java code using controller methods (see examples in DataInjector.java file). E.g. this creates new Ticket booking:
+Unfortunatelly we didn't have time to complete Admin interface so if you wish to load your own data, you can run Java code using controller methods (see examples in DataInjector.java file). E.g. this adds a new Movie to the database:
 
-Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "65CEerFwXESQmL9nDaE");
-TicketBookingController controller = new TicketBookingController();
-controller.create(1, 5, 4, false);
+```java
+Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://db4free.net:3306/picturehouse", "picturehouse", "$password");
+MovieController controller = new MovieController();
+controller.create("Inception", "http://www.youtube.com", "A skilled extractor is offered a chance to regain his old life as payment for a task considered to be impossible.", Date.valueOf(lastWednesdayDate));
 Base.close();
-
-
-You can also run SQL commands directly into the database the application is using. You can connect to the database by running the following command in the Unix terminal (given that you have MySql installed).
-`mysql -u picturehouse -h db4free.net -p65CEerFwXESQmL9nDaE picturehouse`
+```
